@@ -5,24 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby version
 
-* System dependencies
+- System dependencies
 
-* Configuration
+- Configuration
 
-* Database creation
+- Database creation
 
-* Database initialization
+- Database initialization
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+- Deployment instructions
 
-* ...
-
+- ...
 
 # サブスクリプション管理システムの実装
 
@@ -78,8 +77,8 @@ Things you may want to cover:
 - purchase_date: 現在のサブスクリプション期間の開始日時
 - expires_date: 次回更新またはサブスクリプション終了日時
 
+ENGLISH
 
-````markdown
 # Subscription Management System Implementation
 
 Please implement an API in Ruby on Rails to manage subscription start, renewal, and cancellation for a video streaming service.
@@ -105,11 +104,14 @@ You may define any unspecified details appropriately.
   "transaction_id": "string",
   "product_id": "string"
 }
+```
 ````
 
-* user_id: Normally obtained from cookies, etc., but for simplicity in this task, it is passed as a parameter. No validation required.
-* transaction_id: A unique ID identifying the subscription. It remains the same even after auto-renewals.
-* product_id: The subscription plan ID (e.g., com.samansa.subscription.monthly)
+https://developer.apple.com/documentation/appstoreconnectapi/webhook
+
+- user_id: Normally obtained from cookies, etc., but for simplicity in this task, it is passed as a parameter. No validation required.
+- transaction_id: A unique ID identifying the subscription. It remains the same even after auto-renewals.
+- product_id: The subscription plan ID (e.g., com.samansa.subscription.monthly)
 
 At this stage, the subscription is only provisionally started. It becomes fully active upon receiving the Apple webhook. Users cannot access content during the provisional state.
 
@@ -130,14 +132,12 @@ At this stage, the subscription is only provisionally started. It becomes fully 
 }
 ```
 
-* notification_uuid: A unique value per notification
-* type: Notification type. PURCHASE = new purchase, RENEW = auto-renewal, CANCEL = cancellation
-* transaction_id: A unique ID identifying the subscription. It remains the same across renewals
-* product_id: Subscription plan ID (e.g., com.samansa.subscription.monthly)
-* amount / currency: Charged amount and currency
-* purchase_date: Start date/time of the current subscription period
-* expires_date: Next renewal date or subscription end date
+- notification_uuid: A unique value per notification
+- type: Notification type. PURCHASE = new purchase, RENEW = auto-renewal, CANCEL = cancellation
+- transaction_id: A unique ID identifying the subscription. It remains the same across renewals
+- product_id: Subscription plan ID (e.g., com.samansa.subscription.monthly)
+- amount / currency: Charged amount and currency
+- purchase_date: Start date/time of the current subscription period
+- expires_date: Next renewal date or subscription end date
 
-```
-```
 
