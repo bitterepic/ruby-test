@@ -81,7 +81,6 @@ GEM
     base64 (0.3.0)
     bcrypt_pbkdf (1.1.2)
     bigdecimal (4.0.1)
-    bindex (0.8.1)
     bootsnap (1.23.0)
       msgpack (~> 1.2)
     brakeman (8.0.4)
@@ -90,15 +89,6 @@ GEM
     bundler-audit (0.9.3)
       bundler (>= 1.2.0)
       thor (~> 1.0)
-    capybara (3.40.0)
-      addressable
-      matrix
-      mini_mime (>= 0.1.3)
-      nokogiri (~> 1.11)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (>= 1.5, < 3.0)
-      xpath (~> 3.2)
     concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
     crass (1.0.6)
@@ -130,19 +120,12 @@ GEM
     image_processing (1.14.0)
       mini_magick (>= 4.9.5, < 6)
       ruby-vips (>= 2.0.17, < 3)
-    importmap-rails (2.2.3)
-      actionpack (>= 6.0.0)
-      activesupport (>= 6.0.0)
-      railties (>= 6.0.0)
     io-console (0.8.2)
     irb (1.17.0)
       pp (>= 0.6.0)
       prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    jbuilder (2.14.1)
-      actionview (>= 7.0.0)
-      activesupport (>= 7.0.0)
     json (2.19.2)
     json-schema (6.2.0)
       addressable (~> 2.8)
@@ -171,7 +154,6 @@ GEM
       net-pop
       net-smtp
     marcel (1.1.0)
-    matrix (0.4.3)
     mcp (0.9.0)
       json-schema (>= 4.1)
     mini_magick (5.3.1)
@@ -219,10 +201,6 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.9.0)
-    propshaft (1.3.1)
-      actionpack (>= 7.0.0)
-      activesupport (>= 7.0.0)
-      rack
     psych (5.3.1)
       date
       stringio
@@ -278,7 +256,6 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
-    rexml (3.4.4)
     rubocop (1.85.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -312,14 +289,7 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
-    rubyzip (3.2.2)
     securerandom (0.4.1)
-    selenium-webdriver (4.41.0)
-      base64 (~> 0.2)
-      logger (~> 1.4)
-      rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 4.0)
-      websocket (~> 1.0)
     solid_cable (3.0.12)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -350,8 +320,6 @@ GEM
       net-sftp (>= 2.1.2)
       net-ssh (>= 2.8.0)
       ostruct
-    stimulus-rails (1.3.4)
-      railties (>= 6.0.0)
     stringio (3.2.0)
     thor (1.5.0)
     thruster (0.1.19)
@@ -360,9 +328,6 @@ GEM
     thruster (0.1.19-x86_64-linux)
     timeout (0.6.1)
     tsort (0.2.0)
-    turbo-rails (2.0.23)
-      actionpack (>= 7.1.0)
-      railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.2.0)
@@ -370,17 +335,10 @@ GEM
     unicode-emoji (4.2.0)
     uri (1.1.1)
     useragent (0.16.11)
-    web-console (4.3.0)
-      actionview (>= 8.0.0)
-      bindex (>= 0.4.0)
-      railties (>= 8.0.0)
-    websocket (1.2.11)
     websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    xpath (3.2.0)
-      nokogiri (~> 1.8)
     zeitwerk (2.7.5)
 
 PLATFORMS
@@ -398,26 +356,18 @@ DEPENDENCIES
   bootsnap
   brakeman
   bundler-audit
-  capybara
   debug
   image_processing (~> 1.2)
-  importmap-rails
-  jbuilder
   kamal
-  propshaft
   puma (>= 5.0)
   rails (~> 8.1.2)
   rubocop-rails-omakase
-  selenium-webdriver
   solid_cable
   solid_cache
   solid_queue
   sqlite3 (>= 2.1)
-  stimulus-rails
   thruster
-  turbo-rails
   tzinfo-data
-  web-console
 
 BUNDLED WITH
    2.6.9
