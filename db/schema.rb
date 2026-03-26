@@ -27,9 +27,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.datetime "expires_date", null: false
     t.string "notification_uuid", null: false
     t.datetime "purchase_date", null: false
+    t.integer "status", null: false
     t.integer "subscription_id"
     t.index ["expires_date"], name: "index_transactions_on_expires_date"
     t.index ["purchase_date"], name: "index_transactions_on_purchase_date"
+    t.index ["status"], name: "index_transactions_on_status"
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
   end
 
@@ -37,7 +39,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.string "email", null: false
     t.string "family_name", null: false
     t.string "given_name", null: false
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "subscriptions", "products"
