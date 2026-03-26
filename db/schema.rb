@@ -11,4 +11,36 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
+  create_table "product", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "user_id"
+    t.index ["product_id"], name: "index_subscriptions_on_product_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.decimal "amount", null: false
+    t.datetime "expires_date", null: false
+    t.string "notification_uuid", null: false
+    t.datetime "purchase_date", null: false
+    t.integer "subscription_id"
+    t.index ["expires_date"], name: "index_transactions_on_expires_date"
+    t.index ["purchase_date"], name: "index_transactions_on_purchase_date"
+    t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "family_name", null: false
+    t.string "given_name", null: false
+    t.index ["email"], name: "index_users_on_email"
+  end
+
+  add_foreign_key "subscriptions", "products"
+  add_foreign_key "subscriptions", "users"
+  add_foreign_key "transactions", "subscriptions"
 end
