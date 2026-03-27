@@ -6,6 +6,7 @@ class SubscriptionsController < ApplicationController
     @subscriptions = Subscription.all
 
     render json: @subscriptions
+    sdfd
   end
 
   # GET /subscriptions/1

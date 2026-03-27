@@ -15,12 +15,22 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subscription" do
     assert_difference("Subscription.count") do
-       post subscriptions_url, params: { subscription: { user_id: @user.id, product_id: @product.id } }, as: :json
+       post subscriptions_url, params: {
+        subscription: { user_id: @user.id, product_id: @product.id }
+      }, as: :json
     end
 
     assert_response :created
-    puts Subscription.all.to_json
-    assert_equal [subscriptions(:basic_subscription), { id: @response.parsed_body[:id], product_id: @product.id, user_id: @user.id }].to_json, [*Subscription.all].to_json
+
+    expected_subscriptions = [ *subscriptions, {
+            id: @response.parsed_body[:id],
+            product_id: @product.id,
+            user_id: @user.id
+          }
+    ]
+    actual_subscriptions = Subscription.all
+
+    assert_equal expected_subscriptions.to_json, actual_subscriptions.to_json
   end
 
   # test "should show subscription" do

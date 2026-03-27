@@ -1,0 +1,403 @@
+# resolve-type-names: false
+
+class ::Transaction < ::ApplicationRecord
+  extend ::ActiveRecord::Base::ClassMethods[::Transaction, ::Transaction::ActiveRecord_Relation, ::Integer]
+
+  module ::Transaction::GeneratedAttributeMethods
+    def id: () -> ::Integer
+
+    def id=: (::Integer) -> ::Integer
+
+    def id?: () -> bool
+
+    def id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
+
+    def id_change: () -> [ ::Integer?, ::Integer? ]
+
+    def id_will_change!: () -> void
+
+    def id_was: () -> ::Integer?
+
+    def id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
+
+    def id_previous_change: () -> ::Array[::Integer?]?
+
+    def id_previously_was: () -> ::Integer?
+
+    def id_before_last_save: () -> ::Integer?
+
+    def id_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def id_in_database: () -> ::Integer?
+
+    def saved_change_to_id: () -> ::Array[::Integer?]?
+
+    def saved_change_to_id?: () -> bool
+
+    def will_save_change_to_id?: () -> bool
+
+    def restore_id!: () -> void
+
+    def clear_id_change: () -> void
+
+    def id_before_type_cast: () -> ::Integer
+
+    def id_for_database: () -> ::Integer
+
+    def notification_uuid: () -> ::String
+
+    def notification_uuid=: (::String) -> ::String
+
+    def notification_uuid?: () -> bool
+
+    def notification_uuid_changed?: (?from: ::String?, ?to: ::String?) -> bool
+
+    def notification_uuid_change: () -> [ ::String?, ::String? ]
+
+    def notification_uuid_will_change!: () -> void
+
+    def notification_uuid_was: () -> ::String?
+
+    def notification_uuid_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
+
+    def notification_uuid_previous_change: () -> ::Array[::String?]?
+
+    def notification_uuid_previously_was: () -> ::String?
+
+    def notification_uuid_before_last_save: () -> ::String?
+
+    def notification_uuid_change_to_be_saved: () -> ::Array[::String?]?
+
+    def notification_uuid_in_database: () -> ::String?
+
+    def saved_change_to_notification_uuid: () -> ::Array[::String?]?
+
+    def saved_change_to_notification_uuid?: () -> bool
+
+    def will_save_change_to_notification_uuid?: () -> bool
+
+    def restore_notification_uuid!: () -> void
+
+    def clear_notification_uuid_change: () -> void
+
+    def notification_uuid_before_type_cast: () -> ::String
+
+    def notification_uuid_for_database: () -> ::String
+
+    def amount: () -> ::BigDecimal
+
+    def amount=: (::BigDecimal) -> ::BigDecimal
+
+    def amount?: () -> bool
+
+    def amount_changed?: (?from: ::BigDecimal?, ?to: ::BigDecimal?) -> bool
+
+    def amount_change: () -> [ ::BigDecimal?, ::BigDecimal? ]
+
+    def amount_will_change!: () -> void
+
+    def amount_was: () -> ::BigDecimal?
+
+    def amount_previously_changed?: (?from: ::BigDecimal?, ?to: ::BigDecimal?) -> bool
+
+    def amount_previous_change: () -> ::Array[::BigDecimal?]?
+
+    def amount_previously_was: () -> ::BigDecimal?
+
+    def amount_before_last_save: () -> ::BigDecimal?
+
+    def amount_change_to_be_saved: () -> ::Array[::BigDecimal?]?
+
+    def amount_in_database: () -> ::BigDecimal?
+
+    def saved_change_to_amount: () -> ::Array[::BigDecimal?]?
+
+    def saved_change_to_amount?: () -> bool
+
+    def will_save_change_to_amount?: () -> bool
+
+    def restore_amount!: () -> void
+
+    def clear_amount_change: () -> void
+
+    def amount_before_type_cast: () -> ::BigDecimal
+
+    def amount_for_database: () -> ::BigDecimal
+
+    def status: () -> ::String
+
+    def status=: (::String) -> ::String
+
+    def status?: () -> bool
+
+    def status_changed?: (?from: ::String?, ?to: ::String?) -> bool
+
+    def status_change: () -> [ ::String?, ::String? ]
+
+    def status_will_change!: () -> void
+
+    def status_was: () -> ::String?
+
+    def status_previously_changed?: (?from: ::String?, ?to: ::String?) -> bool
+
+    def status_previous_change: () -> ::Array[::String?]?
+
+    def status_previously_was: () -> ::String?
+
+    def status_before_last_save: () -> ::String?
+
+    def status_change_to_be_saved: () -> ::Array[::String?]?
+
+    def status_in_database: () -> ::String?
+
+    def saved_change_to_status: () -> ::Array[::String?]?
+
+    def saved_change_to_status?: () -> bool
+
+    def will_save_change_to_status?: () -> bool
+
+    def restore_status!: () -> void
+
+    def clear_status_change: () -> void
+
+    def status_before_type_cast: () -> ::Integer
+
+    def status_for_database: () -> ::Integer
+
+    def purchase_date: () -> ::ActiveSupport::TimeWithZone
+
+    def purchase_date=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
+
+    def purchase_date?: () -> bool
+
+    def purchase_date_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
+
+    def purchase_date_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+    def purchase_date_will_change!: () -> void
+
+    def purchase_date_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def purchase_date_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
+
+    def purchase_date_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def purchase_date_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def purchase_date_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+    def purchase_date_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def purchase_date_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+    def saved_change_to_purchase_date: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_purchase_date?: () -> bool
+
+    def will_save_change_to_purchase_date?: () -> bool
+
+    def restore_purchase_date!: () -> void
+
+    def clear_purchase_date_change: () -> void
+
+    def purchase_date_before_type_cast: () -> ::Time
+
+    def purchase_date_for_database: () -> ::Time
+
+    def expires_date: () -> ::ActiveSupport::TimeWithZone
+
+    def expires_date=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
+
+    def expires_date?: () -> bool
+
+    def expires_date_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
+
+    def expires_date_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+    def expires_date_will_change!: () -> void
+
+    def expires_date_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def expires_date_previously_changed?: (?from: ::ActiveSupport::TimeWithZone?, ?to: ::ActiveSupport::TimeWithZone?) -> bool
+
+    def expires_date_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def expires_date_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def expires_date_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+    def expires_date_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def expires_date_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+    def saved_change_to_expires_date: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_expires_date?: () -> bool
+
+    def will_save_change_to_expires_date?: () -> bool
+
+    def restore_expires_date!: () -> void
+
+    def clear_expires_date_change: () -> void
+
+    def expires_date_before_type_cast: () -> ::Time
+
+    def expires_date_for_database: () -> ::Time
+
+    def subscription_id: () -> ::Integer?
+
+    def subscription_id=: (::Integer?) -> ::Integer?
+
+    def subscription_id?: () -> bool
+
+    def subscription_id_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
+
+    def subscription_id_change: () -> [ ::Integer?, ::Integer? ]
+
+    def subscription_id_will_change!: () -> void
+
+    def subscription_id_was: () -> ::Integer?
+
+    def subscription_id_previously_changed?: (?from: ::Integer?, ?to: ::Integer?) -> bool
+
+    def subscription_id_previous_change: () -> ::Array[::Integer?]?
+
+    def subscription_id_previously_was: () -> ::Integer?
+
+    def subscription_id_before_last_save: () -> ::Integer?
+
+    def subscription_id_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def subscription_id_in_database: () -> ::Integer?
+
+    def saved_change_to_subscription_id: () -> ::Array[::Integer?]?
+
+    def saved_change_to_subscription_id?: () -> bool
+
+    def will_save_change_to_subscription_id?: () -> bool
+
+    def restore_subscription_id!: () -> void
+
+    def clear_subscription_id_change: () -> void
+
+    def subscription_id_before_type_cast: () -> ::Integer?
+
+    def subscription_id_for_database: () -> ::Integer?
+  end
+  include ::Transaction::GeneratedAttributeMethods
+  module ::Transaction::GeneratedAliasAttributeMethods
+    include ::Transaction::GeneratedAttributeMethods
+
+    alias id_value id
+
+    alias id_value= id=
+
+    alias id_value? id?
+
+    alias id_value_changed? id_changed?
+
+    alias id_value_change id_change
+
+    alias id_value_will_change! id_will_change!
+
+    alias id_value_was id_was
+
+    alias id_value_previously_changed? id_previously_changed?
+
+    alias id_value_previous_change id_previous_change
+
+    alias id_value_previously_was id_previously_was
+
+    alias id_value_before_last_save id_before_last_save
+
+    alias id_value_change_to_be_saved id_change_to_be_saved
+
+    alias id_value_in_database id_in_database
+
+    alias saved_change_to_id_value saved_change_to_id
+
+    alias saved_change_to_id_value? saved_change_to_id?
+
+    alias will_save_change_to_id_value? will_save_change_to_id?
+
+    alias restore_id_value! restore_id!
+
+    alias clear_id_value_change clear_id_change
+
+    alias id_value_before_type_cast id_before_type_cast
+
+    alias id_value_for_database id_for_database
+  end
+  include ::Transaction::GeneratedAliasAttributeMethods
+
+  def subscription: () -> ::Subscription
+  def subscription=: (::Subscription?) -> ::Subscription?
+  def reload_subscription: () -> ::Subscription?
+  def build_subscription: (untyped) -> ::Subscription
+  def create_subscription: (untyped) -> ::Subscription
+  def create_subscription!: (untyped) -> ::Subscription
+  module ::Transaction::GeneratedAssociationMethods
+  end
+  include ::Transaction::GeneratedAssociationMethods
+
+  def purchase!: () -> bool
+  def purchase?: () -> bool
+  def renew!: () -> bool
+  def renew?: () -> bool
+  def cancel!: () -> bool
+  def cancel?: () -> bool
+  def self.statuses: () -> ::ActiveSupport::HashWithIndifferentAccess[::String, ::Integer]
+  def self.purchase: () -> ::Transaction::ActiveRecord_Relation
+  def self.not_purchase: () -> ::Transaction::ActiveRecord_Relation
+  def self.renew: () -> ::Transaction::ActiveRecord_Relation
+  def self.not_renew: () -> ::Transaction::ActiveRecord_Relation
+  def self.cancel: () -> ::Transaction::ActiveRecord_Relation
+  def self.not_cancel: () -> ::Transaction::ActiveRecord_Relation
+
+  module ::Transaction::GeneratedRelationMethods
+    def statuses: () -> ::ActiveSupport::HashWithIndifferentAccess[::String, ::Integer]
+
+    def purchase: () -> ::Transaction::ActiveRecord_Relation
+
+    def not_purchase: () -> ::Transaction::ActiveRecord_Relation
+
+    def renew: () -> ::Transaction::ActiveRecord_Relation
+
+    def not_renew: () -> ::Transaction::ActiveRecord_Relation
+
+    def cancel: () -> ::Transaction::ActiveRecord_Relation
+
+    def not_cancel: () -> ::Transaction::ActiveRecord_Relation
+  end
+
+  class ::Transaction::ActiveRecord_Relation < ::ActiveRecord::Relation
+    include ::Enumerable[::Transaction]
+    include ::Transaction::GeneratedRelationMethods
+    include ::ActiveRecord::Relation::Methods[::Transaction, ::Integer]
+  end
+
+  class ::Transaction::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include ::Enumerable[::Transaction]
+    include ::Transaction::GeneratedRelationMethods
+    include ::ActiveRecord::Relation::Methods[::Transaction, ::Integer]
+
+    def build: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::Transaction
+             | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::Transaction]
+    def create: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::Transaction
+              | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::Transaction]
+    def create!: (?::ActiveRecord::Associations::CollectionProxy::_EachPair attributes) ?{ () -> untyped } -> ::Transaction
+               | (::Array[::ActiveRecord::Associations::CollectionProxy::_EachPair] attributes) ?{ () -> untyped } -> ::Array[::Transaction]
+    def reload: () -> ::Array[::Transaction]
+
+    def replace: (::Array[::Transaction]) -> void
+    def delete: (*::Transaction | ::Integer) -> ::Array[::Transaction]
+    def destroy: (*::Transaction | ::Integer) -> ::Array[::Transaction]
+    def <<: (*::Transaction | ::Array[::Transaction]) -> self
+    def prepend: (*::Transaction | ::Array[::Transaction]) -> self
+  end
+end
+
+class ::ApplicationRecord < ::ActiveRecord::Base
+end
+class ::Subscription < ::ApplicationRecord
+end
