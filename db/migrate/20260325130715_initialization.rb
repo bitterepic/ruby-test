@@ -30,7 +30,7 @@ class Initialization < ActiveRecord::Migration[8.1]
   end
 
   def create_products_table
-    create_table 'product', force: :cascade do |t|
+    create_table 'products', force: :cascade do |t|
       t.string :name, null: false
     end
   end
