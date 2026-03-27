@@ -47,4 +47,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem 'rbs_rails', require: false
+
+  gem "rubocop-rbs_inline", "~> 1.5"
 end
+

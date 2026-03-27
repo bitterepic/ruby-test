@@ -1,9 +1,0 @@
----
-name: sqlite3
-version: '2.0'
-source:
-  type: git
-  name: ruby/gem_rbs_collection
-  revision: 60d59c1b63ad551a5db5a6b62e8efe726b8815bf
-  remote: https://github.com/ruby/gem_rbs_collection.git
-  repo_dir: gems
