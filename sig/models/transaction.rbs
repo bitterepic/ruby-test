@@ -1,3 +1,0 @@
-# A transaction to update a subscription
-class Transaction < ApplicationRecord
-end

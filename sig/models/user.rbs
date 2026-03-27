@@ -1,3 +1,0 @@
-# A user logged into the app
-class User < ApplicationRecord
-end
