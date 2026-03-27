@@ -1,6 +1,18 @@
+# typed: strict
+
 require "test_helper"
 
 class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
+  extend T::Sig
+
+  sig { void }
+  def initialize
+    @subscription = T.let(Subscription.new, Subscription)
+    @user = T.let(User.new, User)
+    @product = T.let(Product.new, Product)
+    @response = T.let(nil, T.untyped)
+  end
+
   setup do
     @subscription = subscriptions(:basic_subscription)
     @user = users(:john_smith)
@@ -8,14 +20,14 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get subscriptions_url, as: :json
+    get "/subscriptions", as: :json
     assert_response :success
     assert_equal subscriptions.as_json, response.parsed_body
   end
 
   test "should create subscription" do
     assert_difference("Subscription.count") do
-       post subscriptions_url, params: {
+       post "/subscriptions", params: {
         subscription: { user_id: @user.id, product_id: @product.id }
       }, as: :json
     end
@@ -26,8 +38,7 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
             id: @response.parsed_body[:id],
             product_id: @product.id,
             user_id: @user.id
-          }
-    ]
+    } ]
     actual_subscriptions = Subscription.all
 
     assert_equal expected_subscriptions.to_json, actual_subscriptions.to_json

@@ -1,22 +1,34 @@
+# typed: strict
+
 class SubscriptionsController < ApplicationController
+  extend T::Sig
+
   before_action :set_subscription, only: %i[ show update destroy ]
 
-  # GET /subscriptions
-  def index
-    @subscriptions = Subscription.all
+  sig { void }
+  def initialize
+    @subscription = T.let(Subscription.new, Subscription)
+  end
 
-    render json: @subscriptions
-    sdfd
+
+  # GET /subscriptions
+  sig { returns(String) }
+  def index
+    subscriptions = T.let(Subscription.all, Subscription::PrivateRelation)
+
+    puts(render json: subscriptions)
+    render json: subscriptions
   end
 
   # GET /subscriptions/1
+  sig { returns(T.untyped) }
   def show
     render json: @subscription
   end
 
   # POST /subscriptions
+  sig { returns(String) }
   def create
-    puts "FISH"
     @subscription = Subscription.new(subscription_params)
     puts @subscription.to_json
 
@@ -28,6 +40,7 @@ class SubscriptionsController < ApplicationController
   end
 
   # PATCH/PUT /subscriptions/1
+  sig { returns(String) }
   def update
     if @subscription.update(subscription_params)
       render json: @subscription
@@ -37,17 +50,20 @@ class SubscriptionsController < ApplicationController
   end
 
   # DELETE /subscriptions/1
-  def destroy
-    @subscription.destroy!
-  end
+  # sig { returns(String) }
+  # def destroy
+  #   @subscription.destroy!
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    sig { void }
     def set_subscription
       @subscription = Subscription.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
+    sig { void }
     def subscription_params
       params.expect(subscription: [ :user_id, :product_id ])
     end
