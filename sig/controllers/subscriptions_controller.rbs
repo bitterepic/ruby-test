@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
   @subscriptions: untyped
 
-  @subscription: fish
+  @subscription: untyped
 
   # GET /subscriptions
   def index: () -> untyped

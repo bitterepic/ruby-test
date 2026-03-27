@@ -1,4 +1,4 @@
-# D = Steep::Diagnostic
+D = Steep::Diagnostic
 #
 # target :lib do
 #   signature "sig"
@@ -22,23 +22,9 @@
 # end
 
  target :app do
-   signature "sig"
-   ignore_signature "sig/test"
-
-   check "app"                       # Directory name
-   check "app/**/*.rb"        # Glob
-   # ignore "lib/templates/*.rb"
-
-  library "pathname"              # Standard libraries
-   # library "strong_json"           # Gems
-
-   # configure_code_diagnostics(D::Ruby.default)      # `default` diagnostics setting (applies by default)
-   # configure_code_diagnostics(D::Ruby.strict)       # `strict` diagnostics setting
-   # configure_code_diagnostics(D::Ruby.lenient)      # `lenient` diagnostics setting
-   # configure_code_diagnostics(D::Ruby.silent)       # `silent` diagnostics setting
-   # configure_code_diagnostics do |hash|             # You can setup everything yourself
-   #   hash[D::Ruby::NoMethod] = :information
-   # end
+    signature "sig"
+    check "app"                       # Directory name
+    configure_code_diagnostics(D::Ruby.strict)       # `strict` diagnostics setting
  end
 
 # target :test do
