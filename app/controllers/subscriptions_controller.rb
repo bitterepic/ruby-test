@@ -16,7 +16,7 @@ class SubscriptionsController < ApplicationController
   def index
     puts "INDEX"
     puts(Subscription.all)
-    subscriptions = T.let(Subscription.all, Subscription::relation_type)
+    subscriptions = Subscription.all
 
     render json: subscriptions
   end
@@ -52,7 +52,7 @@ class SubscriptionsController < ApplicationController
   end
 
   # DELETE /subscriptions/1
-  sig { returns(String) }
+  sig { returns(Integer) }
   def destroy
     @subscription.destroy!
   end
