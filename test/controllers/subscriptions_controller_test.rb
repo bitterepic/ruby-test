@@ -1,54 +1,46 @@
-# typed: false
+# typed: strict
 
 require "test_helper"
 
 class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
   extend T::Sig
 
-  # sig { params(args: T.anything).void }
-  # def initialize(args)
-  #   super(args)
-
-  #   @subscription = T.let(subscriptions(:basic_subscription), Subscription)
-  #   @user = T.let(users(:john_smith), User)
-  #   @product = T.let(products(:basic_subscription), Product)
-  #   # @response = T.let(nil, T.nilable(ActionDispatch::TestResponse))
-  #   # @request = T.let(nil, T.nilable(ActionDispatch::Request))
-  # end
-
-  setup do
-    @subscription = subscriptions(:basic_subscription)
-    @user = users(:john_smith)
-    @product = products(:basic_subscription)
+  sig { params(args: T.anything).void }
+  def initialize(args) 
+    super(args)
+    @response = T.let(ActionDispatch::TestResponse.new(), ActionDispatch::TestResponse)
+    @request = T.let(ActionDispatch::TestRequest.new(), ActionDispatch::TestRequest)
   end
 
   test "should get index" do
     get "/subscriptions", as: :json
-    # puts @request.pretty_inspect
-    # puts @response.pretty_inspect
-    # puts @response.parsed_body.pretty_inspect
     assert_response :success
-    assert_equal subscriptions.as_json, @response.parsed_body
+    if @response 
+      assert_equal subscriptions.as_json, @response.parsed_body
+    end
   end
 
-  # test "should create subscription" do
-  #  assert_difference("Subscription.count") do
-  #     post subscription_url(@subscription), params: {
-  #      subscription: { user_id: @user.id, product_id: @product.id }
-  #    }, as: :json
-  #  end
+  test "should create subscription" do
+   user = users(:john_smith)
+   product = products(:basic_subscription)
+ 
+   assert_difference("Subscription.count") do
+      post "/subscriptions", params: {
+       subscription: { user_id: user.id, product_id: product.id }
+     }, as: :json
+   end
 
-  #  assert_response :created
+   assert_response :created
 
-  #  expected_subscriptions = [ *subscriptions, {
-  #          id: @response.parsed_body[:id],
-  #          product_id: @product.id,
-  #          user_id: @user.id
-  #  } ]
-  #  actual_subscriptions = Subscription.all
+   expected_subscriptions = [ *subscriptions, {
+           id: @response.parsed_body[:id],
+           product_id: product.id,
+           user_id: user.id
+   } ]
+   actual_subscriptions = Subscription.all
 
-  #  assert_equal expected_subscriptions.to_json, actual_subscriptions.to_json
-  # end
+   assert_equal expected_subscriptions.to_json, actual_subscriptions.to_json
+  end
 
   # test "should show subscription" do
   #  get subscription_url(@subscription), as: :json

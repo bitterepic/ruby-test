@@ -14,9 +14,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   sig { returns(String) }
   def index
-    puts "INDEX"
-    puts(Subscription.all, Subscription::PrivateRelation)
-    subscriptions = T.let(Subscription.all, Subscription::PrivateRelation)
+    subscriptions = T.let(Subscription.all, ActiveRecord::Relation)
 
     render json: subscriptions
   end
@@ -24,20 +22,18 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1
   sig { returns(String) }
   def show
-    puts "SHOW"
     render json: @subscription
   end
 
   # POST /subscriptions
   sig { returns(String) }
   def create
-    @subscription = Subscription.new(subscription_params)
-    puts @subscription.to_json
+    new_subscription = Subscription.new(subscription_params)
 
-    if @subscription.save
-      render json: @subscription, status: :created, location: @subscription
+    if new_subscription.save
+      render json: new_subscription, status: :created, location: @subscription
     else
-      render json: @subscription.errors, status: :unprocessable_content
+      render json: new_subscription.errors, status: :unprocessable_content
     end
   end
 
@@ -65,7 +61,7 @@ class SubscriptionsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    sig { void }
+    sig { returns(ActionController::Parameters) }
     def subscription_params
       params.expect(subscription: [ :user_id, :product_id ])
     end
