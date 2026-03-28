@@ -9108,6 +9108,9 @@ class ActionController::TestCase < ::ActiveSupport::TestCase
   # pkg:gem/actionpack#lib/action_controller/test_case.rb:600
   def _run_setup_callbacks(&block); end
 
+  # pkg:gem/actionpack#lib/action_controller/test_case.rb:601
+  def before_setup; end
+
   class << self
     # pkg:gem/actionpack#lib/action_controller/test_case.rb:599
     def _controller_class; end
@@ -13592,6 +13595,19 @@ class ActionDispatch::IntegrationTest < ::ActiveSupport::TestCase
   include ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting
   extend ::ActionDispatch::IntegrationTest::Behavior::ClassMethods
   extend ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting::ClassMethods
+
+  # pkg:gem/actionpack#lib/action_dispatch/testing/integration.rb:671
+  def before_setup; end
+
+  class << self
+    private
+
+    # pkg:gem/actionpack#lib/action_dispatch/testing/integration.rb:671
+    def __class_attr_fixture_paths; end
+
+    # pkg:gem/actionpack#lib/action_dispatch/testing/integration.rb:671
+    def __class_attr_fixture_paths=(new_value); end
+  end
 end
 
 # pkg:gem/actionpack#lib/action_dispatch/testing/integration.rb:660
@@ -13609,9 +13625,6 @@ module ActionDispatch::IntegrationTest::Behavior
   include ::ActionDispatch::Routing::UrlFor
   include ::ActionDispatch::IntegrationTest::UrlOptions
   include ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting
-
-  mixes_in_class_methods ::ActionDispatch::IntegrationTest::Behavior::ClassMethods
-  mixes_in_class_methods ::ActionDispatch::Assertions::RoutingAssertions::WithIntegrationRouting::ClassMethods
 
   # pkg:gem/actionpack#lib/action_dispatch/testing/integration.rb:693
   def app; end

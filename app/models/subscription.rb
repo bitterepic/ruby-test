@@ -1,8 +1,6 @@
-#typed:true
+#typed:strict
 
 # frozen_string_literal: true
-
-  extend T::Sig
 
 # A subscription for a product for a user
 class Subscription < ApplicationRecord
