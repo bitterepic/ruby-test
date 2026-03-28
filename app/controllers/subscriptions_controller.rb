@@ -1,21 +1,22 @@
-# typed: strict
+# typed: true
 
 class SubscriptionsController < ApplicationController
   extend T::Sig
 
   before_action :set_subscription, only: %i[ show update destroy ]
 
-  #sig { void }
-  #def initialize
-  #  @subscription = T.let(Subscription.new, Subscription)
-  #end
+  sig { void }
+  def initialize
+    @subscription = T.let(Subscription.new, Subscription)
+  end
 
 
   # GET /subscriptions
   sig { returns(String) }
   def index
     puts "INDEX"
-    subscriptions = T.let(Subscription.all, Subscription::PrivateRelation)
+    puts(Subscription.all)
+    subscriptions = T.let(Subscription.all, Subscription::relation_type)
 
     render json: subscriptions
   end
@@ -51,7 +52,7 @@ class SubscriptionsController < ApplicationController
   end
 
   # DELETE /subscriptions/1
-  # sig { returns(String) }
+  sig { returns(String) }
   def destroy
     @subscription.destroy!
   end

@@ -97,5 +97,11 @@ module GeneratedPathHelpersModule
   def rails_storage_redirect_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def subscription_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def subscriptions_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_path(*args); end
 end
