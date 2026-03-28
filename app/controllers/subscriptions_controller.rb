@@ -5,11 +5,14 @@ class SubscriptionsController < ApplicationController
 
   before_action :set_subscription, only: %i[ show update destroy ]
 
-  sig { void }
-  def initialize
-    @subscription = T.let(Subscription.new, Subscription)
+  sig { returns(Subscription) }
+  def subscription
+    if @subscription.nil?
+      throw "ERROR"
+    else
+      @subscription
+    end
   end
-
 
   # GET /subscriptions
   sig { returns(String) }
@@ -22,7 +25,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1
   sig { returns(String) }
   def show
-    render json: @subscription
+    render json: subscription
   end
 
   # POST /subscriptions
@@ -31,7 +34,7 @@ class SubscriptionsController < ApplicationController
     new_subscription = Subscription.new(subscription_params)
 
     if new_subscription.save
-      render json: new_subscription, status: :created, location: @subscription
+render json: new_subscription, status: :created, location: subscription_path(new_subscription.id)
     else
       render json: new_subscription.errors, status: :unprocessable_content
     end
@@ -40,27 +43,25 @@ class SubscriptionsController < ApplicationController
   # PATCH/PUT /subscriptions/1
   sig { returns(String) }
   def update
-    if @subscription.update(subscription_params)
-      render json: @subscription
+    if subscription.update(subscription_params)
+      render json: subscription
     else
-      render json: @subscription.errors, status: :unprocessable_content
+      render json: subscription.errors, status: :unprocessable_content
     end
   end
 
   # DELETE /subscriptions/1
-  sig { returns(Integer) }
+  sig { void }
   def destroy
-    @subscription.destroy!
+    subscription.destroy!
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     sig { void }
     def set_subscription
       @subscription = Subscription.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     sig { returns(ActionController::Parameters) }
     def subscription_params
       params.expect(subscription: [ :user_id, :product_id ])

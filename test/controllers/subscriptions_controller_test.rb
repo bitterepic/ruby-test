@@ -34,21 +34,23 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
    assert_equal expected_subscriptions.to_json, actual_subscriptions.to_json
   end
 
-  # test "should show subscription" do
-  #  get subscription_url(@subscription), as: :json
-  #  assert_response :success
-  # end
+  test "should show subscription" do
+    subscription = subscriptions(:basic_subscription)
+    get subscription_url(subscription.id), as: :json
+    assert_response :success
+  end
 
   # test "should update subscription" do
-  #  patch subscription_url(@subscription), params: { subscription: { name: @subscription.name } }, as: :json
-  #  assert_response :success
+  #   patch subscription_url(@subscription), params: { subscription: { name: @subscription.name } }, as: :json
+  #   assert_response :success
   # end
 
-  # test "should destroy subscription" do
-  #  assert_difference("Subscription.count", -1) do
-  #    delete subscription_url(@subscription), as: :json
-  #  end
+  test "should destroy subscription" do
+    subscription = subscriptions(:basic_subscription)
+    assert_difference("Subscription.count", -1) do
+      delete subscription_url(subscription.id), as: :json
+    end
 
-  #  assert_response :no_content
-  # end
+    assert_response :no_content
+  end
 end
