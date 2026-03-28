@@ -17,7 +17,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   sig { returns(String) }
   def index
-    subscriptions = T.let(Subscription.all, ActiveRecord::Relation)
+    subscriptions = T.let(Subscription.all.to_a, T::Array[Subscription])
 
     render json: subscriptions
   end
