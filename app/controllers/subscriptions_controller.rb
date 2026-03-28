@@ -1,14 +1,20 @@
 # typed: false
 
 class SubscriptionsController < ApplicationController
-  extend T::Sig
 
   before_action :set_subscription, only: %i[ show update destroy ]
+
+  extend T::Sig
+
+  sig { void }
+  def initialize
+    @subscription = T.let(nil, T.nilable(Subscription))
+  end
 
   sig { returns(Subscription) }
   def subscription
     if @subscription.nil?
-      throw "ERROR"
+      throw TypeError.new("Subscription is nil")
     else
       @subscription
     end
