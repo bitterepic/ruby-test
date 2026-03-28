@@ -5,24 +5,25 @@ class SubscriptionsController < ApplicationController
 
   before_action :set_subscription, only: %i[ show update destroy ]
 
-  sig { void }
-  def initialize
-    @subscription = T.let(Subscription.new, Subscription)
-  end
+  #sig { void }
+  #def initialize
+  #  @subscription = T.let(Subscription.new, Subscription)
+  #end
 
 
   # GET /subscriptions
   sig { returns(String) }
   def index
+    puts "INDEX"
     subscriptions = T.let(Subscription.all, Subscription::PrivateRelation)
 
-    puts(render json: subscriptions)
     render json: subscriptions
   end
 
   # GET /subscriptions/1
-  sig { returns(T.untyped) }
+  sig { returns(String) }
   def show
+    puts "SHOW"
     render json: @subscription
   end
 
@@ -51,9 +52,9 @@ class SubscriptionsController < ApplicationController
 
   # DELETE /subscriptions/1
   # sig { returns(String) }
-  # def destroy
-  #   @subscription.destroy!
-  # end
+  def destroy
+    @subscription.destroy!
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
