@@ -1,23 +1,15 @@
 # typed: strict
 
 require "test_helper"
+require "test_helpers/testing"
 
-class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
+class SubscriptionsControllerTest < Testing::IntegrationTest
   extend T::Sig
-
-  sig { params(args: T.anything).void }
-  def initialize(args) 
-    super(args)
-    @response = T.let(ActionDispatch::TestResponse.new(), ActionDispatch::TestResponse)
-    @request = T.let(ActionDispatch::TestRequest.new(), ActionDispatch::TestRequest)
-  end
 
   test "should get index" do
     get "/subscriptions", as: :json
     assert_response :success
-    if @response 
-      assert_equal subscriptions.as_json, @response.parsed_body
-    end
+      assert_equal subscriptions.as_json, response.parsed_body
   end
 
   test "should create subscription" do
@@ -33,7 +25,7 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
    assert_response :created
 
    expected_subscriptions = [ *subscriptions, {
-           id: @response.parsed_body[:id],
+           id: response.parsed_body[:id],
            product_id: product.id,
            user_id: user.id
    } ]
