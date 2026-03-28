@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 
 class SubscriptionsController < ApplicationController
   extend T::Sig
@@ -16,7 +16,7 @@ class SubscriptionsController < ApplicationController
   def index
     puts "INDEX"
     puts(Subscription.all)
-    subscriptions = Subscription.all
+    subscriptions = T.let(Subscription.all, Subscription::PrivateRelation)
 
     render json: subscriptions
   end
