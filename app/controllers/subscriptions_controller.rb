@@ -1,7 +1,6 @@
 # typed: false
 
 class SubscriptionsController < ApplicationController
-
   before_action :set_subscription, only: %i[ show update destroy ]
 
   extend T::Sig
@@ -40,6 +39,9 @@ class SubscriptionsController < ApplicationController
     new_subscription = Subscription.new(subscription_params)
 
     if new_subscription.save
+
+
+
 render json: new_subscription, status: :created, location: subscription_path(new_subscription.id)
     else
       render json: new_subscription.errors, status: :unprocessable_content
