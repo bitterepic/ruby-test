@@ -10,6 +10,12 @@ module GeneratedPathHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def auth_login_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def me_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -104,4 +110,10 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def users_path(*args); end
 end

@@ -26,6 +26,7 @@ class Initialization < ActiveRecord::Migration[8.1]
       t.string :given_name, null: false
       t.string :family_name, null: false
       t.string :email, null: false, index: { unique: true } 
+      t.string :password_digest, null: false
     end
   end
 

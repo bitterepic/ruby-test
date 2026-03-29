@@ -55,3 +55,8 @@ group :development, :test do
 
   gem "rubocop", require: false
 end
+
+gem "bcrypt", "~> 3.1"
+gem "jwt", "~> 3.1"
+gem "rack-cors", "~> 3.0"
+gem "active_model_serializers", "~> 0.10.16"

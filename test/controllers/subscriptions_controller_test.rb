@@ -15,12 +15,12 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
   test "should create subscription" do
    user = users(:john_smith)
    product = products(:basic_subscription)
- 
+
    assert_difference("Subscription.count") do
       post "/subscriptions", params: {
        subscription: { user_id: user.id, product_id: product.id }
      }, as: :json
-   end
+  end
 
    assert_response :created
 

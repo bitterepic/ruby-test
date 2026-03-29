@@ -10,6 +10,12 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def auth_login_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def me_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -104,4 +110,10 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def users_url(*args); end
 end
