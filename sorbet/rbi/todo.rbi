@@ -5,7 +5,8 @@
 # typed: false
 
 module ::CI; end
-module Bundler::ConnectionPool::ForkTracker; end
+module Bundler::FetchMetadata; end
+module Bundler::MatchMetadata; end
 module ERB::Escape; end
 module Set::SubclassCompatible; end
 module Set::SubclassCompatible::ClassMethods; end

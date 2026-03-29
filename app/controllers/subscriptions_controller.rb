@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[ show update destroy ]
