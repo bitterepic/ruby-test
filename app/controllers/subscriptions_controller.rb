@@ -12,11 +12,9 @@ class SubscriptionsController < ApplicationController
 
   sig { returns(Subscription) }
   def subscription
-    if @subscription.nil?
-      throw TypeError.new("Subscription is nil")
-    else
-      @subscription
-    end
+    throw TypeError.new("Subscription is nil") if @subscription.nil?
+
+    @subscription
   end
 
   # GET /subscriptions

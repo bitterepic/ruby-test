@@ -4,18 +4,22 @@
 class Initialization < ActiveRecord::Migration[8.1]
   def create_subscriptions_table
     create_table 'subscriptions', force: :cascade do |t|
-      t.belongs_to :user, index: true, foreign_key: true
-      t.belongs_to :product, index: true, foreign_key: true
+      t.belongs_to :user, index: true, foreign_key: true, comment: "The user that owns this subscription"
+      t.belongs_to :product, index: true, foreign_key: true, comment: "The product this subscription represents"
+      t.string :transaction_id, null: false, index: { unique: true }, comment: "External ID, like from apple"
+      t.datetime :created_at, null: false
     end
   end
 
   def create_transactions_table
     create_table 'transactions', force: :cascade do |t|
-      t.string :notification_uuid, null: false
+      t.string :notification_uuid, null: false, index: { unique: true }
+      t.string :type, null: false, comment: "PURCHASE or RENEW or CANCEL"
       t.decimal :amount, null: false
       t.integer :status, null: false, index: true
       t.datetime :purchase_date, null: false, index: true
       t.datetime :expires_date, null: false, index: true
+      t.datetime :created_at, null: false
 
       t.belongs_to :subscription, index: true, foreign_key: true
     end
@@ -25,14 +29,16 @@ class Initialization < ActiveRecord::Migration[8.1]
     create_table 'users', force: :cascade do |t|
       t.string :given_name, null: false
       t.string :family_name, null: false
-      t.string :email, null: false, index: { unique: true } 
+      t.string :email, null: false, index: { unique: true }
       t.string :password_digest, null: false
+      t.datetime :created_at, null: false
     end
   end
 
   def create_products_table
     create_table 'products', force: :cascade do |t|
       t.string :name, null: false
+      t.datetime :created_at, null: false
     end
   end
 

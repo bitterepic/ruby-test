@@ -17,8 +17,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "product_id"
+    t.string "transaction_id", null: false
     t.integer "user_id"
     t.index ["product_id"], name: "index_subscriptions_on_product_id"
+    t.index ["transaction_id"], name: "index_subscriptions_on_transaction_id", unique: true
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -29,7 +31,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.datetime "purchase_date", null: false
     t.integer "status", null: false
     t.integer "subscription_id"
+    t.string "type", null: false
     t.index ["expires_date"], name: "index_transactions_on_expires_date"
+    t.index ["notification_uuid"], name: "index_transactions_on_notification_uuid", unique: true
     t.index ["purchase_date"], name: "index_transactions_on_purchase_date"
     t.index ["status"], name: "index_transactions_on_status"
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
@@ -39,6 +43,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.string "email", null: false
     t.string "family_name", null: false
     t.string "given_name", null: false
+    t.string "password_digest", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
