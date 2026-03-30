@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "/me", to: "users#me"
   post "/auth/login", to: "auth#login"
 
-  post "/webhooks/apple/transaction", to: "apple#create"
+  post "/webhooks/apple/transaction", to: "apple_transactions#create"
 
   # Defines the root path route ("/")
   # root "posts#index"
