@@ -3,7 +3,7 @@ require "test_helpers/testing"
 
 class UserFlowsTest < Testing::IntegrationTest
   test "create a subscription" do
-    TODO LOGIN
+    post "/subscriptions", params: { username: "", password: "" }, as: :json
 
     ## Create the placeholder for a subscription
     post "/subscriptions", params: {
@@ -26,6 +26,7 @@ class UserFlowsTest < Testing::IntegrationTest
     }, as: :json
     assert_response :created
 
+    ## Webhook call to renew
     post "/webhooks/apple/transactions", params: {
       "notification_uuid": "2",
       "type": "RENEW",
@@ -38,6 +39,7 @@ class UserFlowsTest < Testing::IntegrationTest
     }, as: :json
     assert_response :created
 
+    ## Webhook call to cancel subscription
     post "/webhooks/transactions", params: {
       "notification_uuid": "3",
       "type": "CANCEL",

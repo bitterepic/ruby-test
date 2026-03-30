@@ -3,14 +3,14 @@
 
 # A transaction to update a subscription
 class Transaction < ApplicationRecord
-  extends T::Sig
+  extend T::Sig
 
   enum :status, { purchase: 0, renew: 1, cancel: 3 }
   belongs_to :subscription
 
-  sig { returns(T::BOolean) }
+  sig { returns(T::Boolean) }
   def expired
-    expires_date <=> Time.now.isoiso8601 < 0
+    Date.parse(expires_date) < Time.now
   end
 
 sig { returns(T::Boolean) }
