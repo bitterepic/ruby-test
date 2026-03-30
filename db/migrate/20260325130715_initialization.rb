@@ -32,6 +32,7 @@ class Initialization < ActiveRecord::Migration[8.1]
       t.string :email, null: false, index: { unique: true }
       t.string :password_digest, null: false
       t.datetime :created_at, null: false
+    t.string :roles, null: false, default: [].to_json
     end
   end
 

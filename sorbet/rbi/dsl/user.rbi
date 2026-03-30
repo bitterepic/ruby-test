@@ -912,6 +912,54 @@ class User
     sig { void }
     def restore_password_digest!; end
 
+    sig { void }
+    def restore_roles!; end
+
+    sig { returns(T.untyped) }
+    def roles; end
+
+    sig { params(value: T.untyped).returns(T.untyped) }
+    def roles=(value); end
+
+    sig { returns(T::Boolean) }
+    def roles?; end
+
+    sig { returns(T.untyped) }
+    def roles_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def roles_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def roles_came_from_user?; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def roles_change; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def roles_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def roles_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.untyped) }
+    def roles_in_database; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def roles_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def roles_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.untyped) }
+    def roles_previously_was; end
+
+    sig { returns(T.untyped) }
+    def roles_was; end
+
+    sig { void }
+    def roles_will_change!; end
+
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_created_at; end
 
@@ -954,6 +1002,12 @@ class User
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_password_digest?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def saved_change_to_roles; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_roles?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_created_at?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
@@ -974,6 +1028,9 @@ class User
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_password_digest?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_roles?(from: T.unsafe(nil), to: T.unsafe(nil)); end
   end
 
   module GeneratedRelationMethods

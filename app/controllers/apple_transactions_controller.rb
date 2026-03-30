@@ -23,6 +23,7 @@ class AppleTransactionsController < ApplicationController
   sig { returns(String) }
   def create
     Rails.logger.info "START: #{self.class.name}"
+    throw ForbiddenError.new if (authenticated_user.has_role? "apple")
 
     subscription = T.let(Subscription.find(transaction_params[:transaction_id]), T.nilable(Subscription))
     throw SubscriptionNotFound.new(transaction_params) if subscription.nil?
@@ -33,7 +34,7 @@ class AppleTransactionsController < ApplicationController
     already_exists = Transaction.exists?(external_id: transaction_params[:external_id])
     throw DuplicateNotificationError.new(transaction_params) if already_exists
 
-    invalid_expiration = (previous_transaction && transaction_params['type'] != "CANCEL") ? previous_transaction.expires_date >= transaction_params[:expires_date] : false
+    invalid_expiration = (previous_transaction && transaction_params["type"] != "CANCEL") ? previous_transaction.expires_date >= transaction_params[:expires_date] : false
     throw InvalidExpirationError.new(transaction_params) if invalid_expiration
 
     new_transaction = Transaction.new({ external_id:, source: "apple", **leftover_transaction_params })
