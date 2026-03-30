@@ -3,17 +3,17 @@
 class AppleTransactionsController < ApplicationController
   extend T::Sig
 
-  rescue_from DuplicateNotificationError, with: :handle_nonfatal_error
-  rescue_from InvalidExpirationError, with: :handle_nonfatal_error
-  rescue_from PurchaseMustBeFirstTransaction, with: :handle_nonfatal_error
-  rescue_from AlreadyCancelledError, with: :handle_nonfatal_error
-  rescue_from SubscriptionNotFound, with: :handle_nonfatal_error
-
   class DuplicateNotificationError < StandardError; end
   class InvalidExpirationError < StandardError; end
   class PurchaseMustBeFirstTransaction < StandardError; end
   class AlreadyCancelledError < StandardError; end
   class SubscriptionNotFound < StandardError; end
+
+  rescue_from DuplicateNotificationError, with: :handle_nonfatal_error
+  rescue_from InvalidExpirationError, with: :handle_nonfatal_error
+  rescue_from PurchaseMustBeFirstTransaction, with: :handle_nonfatal_error
+  rescue_from AlreadyCancelledError, with: :handle_nonfatal_error
+  rescue_from SubscriptionNotFound, with: :handle_nonfatal_error
 
   # POST /webhooks/apple/transaction
   sig { returns(String) }
@@ -24,7 +24,8 @@ class AppleTransactionsController < ApplicationController
     throw SubscriptionNotFound.new(transaction_params) if subscription.nil?
 
     previous_transaction = T.let(subscription.transactions.first, T.nilable(Transaction))
-    new_transaction = Transaction.new(transaction_params)
+    transaction_params => { external_id: notification_uuid, **leftover_transaction_params }
+    new_transaction = Transaction.new({ notification_uuid:, source: "apple", **leftover_transaction_params })
 
     already_exists = Transaction.exists?(notification_uuid: new_transaction.notification_uuid)
     throw DuplicateNotificationError.new(transaction_params) if already_exists

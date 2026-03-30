@@ -116,4 +116,7 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def users_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def webhooks_apple_transaction_path(*args); end
 end

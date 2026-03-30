@@ -12,10 +12,12 @@
 
 ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
   create_table "products", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "name", null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.integer "product_id"
     t.string "transaction_id", null: false
     t.integer "user_id"
@@ -26,20 +28,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
 
   create_table "transactions", force: :cascade do |t|
     t.decimal "amount", null: false
+    t.datetime "created_at", null: false
     t.datetime "expires_date", null: false
-    t.string "notification_uuid", null: false
+    t.string "external_id", null: false
     t.datetime "purchase_date", null: false
-    t.integer "status", null: false
+    t.integer "source", null: false
     t.integer "subscription_id"
-    t.string "type", null: false
+    t.integer "type", null: false
+    t.index ["created_at"], name: "index_transactions_on_created_at"
     t.index ["expires_date"], name: "index_transactions_on_expires_date"
-    t.index ["notification_uuid"], name: "index_transactions_on_notification_uuid", unique: true
+    t.index ["external_id"], name: "index_transactions_on_external_id", unique: true
     t.index ["purchase_date"], name: "index_transactions_on_purchase_date"
-    t.index ["status"], name: "index_transactions_on_status"
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "email", null: false
     t.string "family_name", null: false
     t.string "given_name", null: false

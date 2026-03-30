@@ -13,13 +13,13 @@ class Initialization < ActiveRecord::Migration[8.1]
 
   def create_transactions_table
     create_table 'transactions', force: :cascade do |t|
-      t.string :notification_uuid, null: false, index: { unique: true }
-      t.string :type, null: false, comment: "PURCHASE or RENEW or CANCEL"
+      t.string :external_id, null: false, index: { unique: true }, comment: "notification_uiid for APPLE"
+      t.integer :source, null: false, comment: "apple or google or web"
+      t.integer :type, null: false, comment: "purchase or renew or cancel"
       t.decimal :amount, null: false
-      t.integer :status, null: false, index: true
       t.datetime :purchase_date, null: false, index: true
       t.datetime :expires_date, null: false, index: true
-      t.datetime :created_at, null: false
+      t.datetime :created_at, null: false, index: true
 
       t.belongs_to :subscription, index: true, foreign_key: true
     end

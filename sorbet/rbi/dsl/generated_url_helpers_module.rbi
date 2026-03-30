@@ -116,4 +116,7 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def users_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def webhooks_apple_transaction_url(*args); end
 end
