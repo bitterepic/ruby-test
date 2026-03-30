@@ -24,18 +24,23 @@ class AppleTransactionsController < ApplicationController
     throw SubscriptionNotFound.new(transaction_params) if subscription.nil?
 
     previous_transaction = T.let(subscription.transactions.first, T.nilable(Transaction))
-    transaction_params => { external_id: notification_uuid, **leftover_transaction_params }
-    new_transaction = Transaction.new({ notification_uuid:, source: "apple", **leftover_transaction_params })
+    transaction_params => { notification_uuid: external_id, **leftover_transaction_params }
 
-    already_exists = Transaction.exists?(notification_uuid: new_transaction.notification_uuid)
+    already_exists = Transaction.exists?(external_id: transaction_params[:external_id])
     throw DuplicateNotificationError.new(transaction_params) if already_exists
 
-    invalid_expiration = previous_transaction && previous_transaction.expires_date >= new_transaction.expires_date
+    invalid_expiration = (previous_transaction && transaction_params['type'] != "CANCEL") ? previous_transaction.expires_date >= transaction_params[:expires_date] : false
     throw InvalidExpirationError.new(transaction_params) if invalid_expiration
 
-    Rails.logger.info "SUCCESS: #{self.class.name}"
+    new_transaction = Transaction.new({ external_id:, source: "apple", **leftover_transaction_params })
 
-    render nothing: true, status: :success, location: "/webhooks/apple/transaction"
+    if new_transaction.save
+      Rails.logger.info "SUCCESS: #{self.class.name}"
+      render json: new_transaction, status: :created, location: "/webhooks/apple/transaction"
+    else
+      Rails.logger.info "ERROR: #{self.class.name} unprocessable_content #{new_transaction.errors}"
+      render json: new_transaction.errors, status: :unprocessable_content
+    end
   end
 
   private
