@@ -32,3 +32,5 @@
 /config/*.key
 
 /.gem_rbs_collection/
+
+.DS_Store
