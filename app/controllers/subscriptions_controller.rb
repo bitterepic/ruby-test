@@ -1,7 +1,7 @@
 # typed: strict
 
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[ show update destroy ]
+  before_action :ensure_authorized, :set_subscription, only: %i[ show ]
 
   extend T::Sig
 
@@ -10,17 +10,10 @@ class SubscriptionsController < ApplicationController
     @subscription = T.let(nil, T.nilable(Subscription))
   end
 
-  sig { returns(Subscription) }
-  def subscription
-    throw TypeError.new("Subscription is nil") if @subscription.nil?
-
-    @subscription
-  end
-
   # GET /subscriptions
   sig { returns(String) }
   def index
-    subscriptions = T.let(Subscription.all.to_a, T::Array[Subscription])
+    subscriptions = T.let(Subscription.where(user_id: authenticated_user.id).to_a, T::Array[Subscription])
 
     render json: subscriptions
   end
@@ -34,7 +27,7 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   sig { returns(String) }
   def create
-    new_subscription = Subscription.new(subscription_params)
+    new_subscription = Subscription.new({ **subscription_params, user_id: authenticated_user.id })
 
     if new_subscription.save
       render json: new_subscription, status: :created, location: subscription_path(new_subscription.id)
@@ -43,30 +36,21 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /subscriptions/1
-  sig { returns(String) }
-  def update
-    if subscription.update(subscription_params)
-      render json: subscription
-    else
-      render json: subscription.errors, status: :unprocessable_content
-    end
-  end
-
-  # DELETE /subscriptions/1
-  sig { void }
-  def destroy
-    subscription.destroy!
-  end
-
   private
     sig { void }
     def set_subscription
       @subscription = Subscription.find(params.expect(:id))
+      throw ForbiddenError.new if (@subscription.user_id != authenticated_user.id)
+    end
+
+    sig { returns(Subscription) }
+    def subscription
+      throw NotFoundError.new if @subscription.nil?
+      @subscription
     end
 
     sig { returns(ActionController::Parameters) }
     def subscription_params
-      params.expect(subscription: [ :user_id, :product_id ])
+      params.expect(subscription: [ :product_id ])
     end
 end

@@ -10,10 +10,10 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
-  def auth_login_url(*args); end
+  def apple_transactions_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def me_url(*args); end
+  def auth_login_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
@@ -116,7 +116,4 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def users_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def webhooks_apple_transaction_url(*args); end
 end
