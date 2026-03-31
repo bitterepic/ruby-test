@@ -9,6 +9,8 @@ class AuthenticationControllerTest < Testing::IntegrationTest
   extend T::Sig
 
   setup do
+    @token = T.let("", String)
+
     # Create the user
     Timecop.freeze(DateTime.new(1990).utc) do
       post "/register", params: {
@@ -34,9 +36,7 @@ class AuthenticationControllerTest < Testing::IntegrationTest
       response.parsed_body)
   end
 
-  test "registers a user" do
-
-    # Try logging in where it is successful
+  test "registers a user and can login" do
     Timecop.freeze(DateTime.new(1991).utc) do
       post "/login", params: {
         email: "test@example.com",
@@ -47,13 +47,13 @@ class AuthenticationControllerTest < Testing::IntegrationTest
 
       token = response.parsed_body.as_json["token"]
 
-      puts token, JsonWebToken.decode(token)
       assert_equal(JsonWebToken.decode(token),
         [{"data" => {"id" => 1}, "exp" => 662702400}, {"alg" => "HS256"}]
       )
     end
+  end
 
-    # Try logging where it is expired
+  test "registers a user and login expired" do
     Timecop.freeze(DateTime.new(1991).utc) do
       post "/login", params: {
         email: "test@example.com",
@@ -62,12 +62,11 @@ class AuthenticationControllerTest < Testing::IntegrationTest
 
       assert_response :success
 
-      token = response.parsed_body.as_json["token"]
+      @token = response.parsed_body.as_json["token"]
+    end
 
-      puts token, JsonWebToken.decode(token)
-      assert_equal(JsonWebToken.decode(token),
-        [{"data" => {"id" => 1}, "exp" => 662702400}, {"alg" => "HS256"}]
-      )
+    Timecop.freeze(DateTime.new(1992).utc) do
+      assert_nil(JsonWebToken.decode(@token))
     end
   end
 end
