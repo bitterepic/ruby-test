@@ -13,7 +13,7 @@ module GeneratedUrlHelpersModule
   def apple_transactions_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def auth_login_url(*args); end
+  def login_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
@@ -101,6 +101,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def rails_storage_redirect_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def register_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def subscription_url(*args); end

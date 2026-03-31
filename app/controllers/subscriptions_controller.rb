@@ -1,7 +1,7 @@
 # typed: strict
 
 class SubscriptionsController < ApplicationController
-  before_action :ensure_authorized, :set_subscription, only: %i[ show ]
+  before_action :ensure_authenticated, :set_subscription, only: %i[ show ]
 
   extend T::Sig
 

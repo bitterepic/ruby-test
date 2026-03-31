@@ -1,7 +1,7 @@
 # typed: strict
 
 class AppleTransactionsController < ApplicationController
-  before_action :ensure_authorized, :set_subscription, only: %i[ create ]
+  before_action :ensure_authenticated, :set_subscription, only: %i[ create ]
 
   extend T::Sig
 

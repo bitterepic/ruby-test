@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.string "family_name", null: false
     t.string "given_name", null: false
     t.string "password_digest", null: false
+    t.string "roles", default: "[]", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

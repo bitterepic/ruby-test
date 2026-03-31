@@ -555,3 +555,64 @@ DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is de
 DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
 DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0) /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2026-03-31 07:05:52.282010', '2026-03-31 07:05:52.282012') RETURNING "key" /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '535538fd578365489e1ea4aefe64b8d17b3e5c65', '2026-03-31 07:05:52.284137', '2026-03-31 07:05:52.284138') RETURNING "key" /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+Migrating to Initialization (20260325130715)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='RubyTest'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "products" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL) /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "given_name" varchar NOT NULL, "family_name" varchar NOT NULL, "email" varchar NOT NULL, "password_digest" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "roles" varchar DEFAULT '[]' NOT NULL) /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "subscriptions" /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "subscriptions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "product_id" integer, "transaction_id" varchar NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_933bdff476"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_52a3b81fce"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+) /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_subscriptions_on_user_id" ON "subscriptions" ("user_id") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_subscriptions_on_product_id" ON "subscriptions" ("product_id") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_subscriptions_on_transaction_id" ON "subscriptions" ("transaction_id") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "external_id" varchar NOT NULL, "source" integer NOT NULL, "type" integer NOT NULL, "amount" decimal NOT NULL, "purchase_date" datetime(6) NOT NULL, "expires_date" datetime(6) NOT NULL, "created_at" datetime(6) NOT NULL, "subscription_id" integer, CONSTRAINT "fk_rails_e5749242c6"
+FOREIGN KEY ("subscription_id")
+  REFERENCES "subscriptions" ("id")
+) /*application='RubyTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_transactions_on_external_id" ON "transactions" ("external_id") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_purchase_date" ON "transactions" ("purchase_date") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_expires_date" ON "transactions" ("expires_date") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_created_at" ON "transactions" ("created_at") /*application='RubyTest'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_subscription_id" ON "transactions" ("subscription_id") /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260325130715') RETURNING "version" /*application='RubyTest'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='RubyTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+DEPRECATION WARNING: ActiveSupport::Concurrency::LoadInterlockAwareMonitor is deprecated and will be removed in Rails 9.0. Use Monitor directly instead, as the loading interlock is no longer used. (called from <top (required)> at /opt/homebrew/lib/ruby/gems/4.0.0/bin/tapioca:25)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m

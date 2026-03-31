@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :apple_transactions, path: "/webhooks/apple/transactions", only: [ :create ]
 
   get "up" => "rails/health#show", as: :rails_health_check
-  post "/auth/login", to: "auth#login"
+
+  post "/login", to: "authentication#login"
+  post "/register", to: "authentication#register"
 end
