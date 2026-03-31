@@ -8,7 +8,7 @@ require_relative "../../app/controllers/concerns/json_web_token"
 class AuthenticationControllerTest < Testing::IntegrationTest
   extend T::Sig
 
-  test "registers a user" do
+  setup do
     # Create the user
     Timecop.freeze(DateTime.new(1990).utc) do
       post "/register", params: {
@@ -32,8 +32,28 @@ class AuthenticationControllerTest < Testing::IntegrationTest
         }
       },
       response.parsed_body)
+  end
 
-    # Try logging in
+  test "registers a user" do
+
+    # Try logging in where it is successful
+    Timecop.freeze(DateTime.new(1991).utc) do
+      post "/login", params: {
+        email: "test@example.com",
+        password: "012345678"
+      }, as: :json
+
+      assert_response :success
+
+      token = response.parsed_body.as_json["token"]
+
+      puts token, JsonWebToken.decode(token)
+      assert_equal(JsonWebToken.decode(token),
+        [{"data" => {"id" => 1}, "exp" => 662702400}, {"alg" => "HS256"}]
+      )
+    end
+
+    # Try logging where it is expired
     Timecop.freeze(DateTime.new(1991).utc) do
       post "/login", params: {
         email: "test@example.com",
