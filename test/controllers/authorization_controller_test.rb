@@ -9,23 +9,26 @@ class AuthenticationControllerTest < Testing::IntegrationTest
   extend T::Sig
 
   setup do
+    Timecop.freeze(DateTime.new(1990).utc)
+
     @token = T.let("", String)
 
     # Create the user
-    Timecop.freeze(DateTime.new(1990).utc) do
-      post "/register", params: {
-        email: "test@example.com",
-        family_name: "test family name",
-        given_name: "test given name",
-        password: "012345678"
-      }, as: :json
-    end
+    post "/register", params: {
+      email: "test@example.com",
+      family_name: "test family name",
+      given_name: "test given name",
+      password: "012345678"
+    }, as: :json
 
     assert_response :success
+
+    @user_id = T.let(response.parsed_body['user']['id'], Integer)
+
     assert_equal(
       {
         "user" => {
-          "id" => 1,
+          "id" => @user_id,
           "created_at" => "1990-01-01T00:00:00.000Z",
           "email" => "test@example.com",
           "family_name" => "test family name",
@@ -34,6 +37,10 @@ class AuthenticationControllerTest < Testing::IntegrationTest
         }
       },
       response.parsed_body)
+  end
+
+  teardown do
+    Timecop.return
   end
 
   test "registers a user and can login" do
@@ -48,7 +55,7 @@ class AuthenticationControllerTest < Testing::IntegrationTest
       token = response.parsed_body.as_json["token"]
 
       assert_equal(JsonWebToken.decode(token),
-        [{"data" => {"id" => 1}, "exp" => 662702400}, {"alg" => "HS256"}]
+        [{"data" => {"id" => @user_id}, "exp" => 662702400}, {"alg" => "HS256"}]
       )
     end
   end
