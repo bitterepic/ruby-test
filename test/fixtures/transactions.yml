@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ purchase:
+  external_id: test external id
+  source: apple
+  type: 0
+  purchase_date: 1990-01-01T00:00:00.000Z
+  created_at: 1990-01-01T00:00:00.000Z
+  expires_date: 1990-02-01T00:00:00.000Z
+  subscription: basic_subscription
+  amount: 10.00
+  currency: USD
