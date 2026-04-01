@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   sig { params(target: String).returns(T::Boolean) }
   def has_role?(target)
-    roles.includes? target
+    roles.include? target
   end
 
   serialize :roles, coder: JSON

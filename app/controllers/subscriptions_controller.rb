@@ -21,7 +21,17 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1
   sig { returns(String) }
   def show
-    render json: subscription
+    last_transaction = subscription.transactions.select(
+      :id, 
+      :action, 
+      :created_at, 
+      :currency, 
+      :expires_date, 
+      :external_id, 
+      :purchase_date, 
+      :source
+    ).order(:created_at).first.as_json
+    render json: { **subscription.as_json, last_transaction:  }
   end
 
   # POST /subscriptions
@@ -44,9 +54,10 @@ class SubscriptionsController < ApplicationController
       @subscription = out
     end
 
-    sig { returns(T.nilable(Subscription)) }
+    sig { returns(Subscription) }
     def subscription
       out = @subscription
+
       raise NotFoundError.new if out.nil?
       out
     end

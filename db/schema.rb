@@ -25,6 +25,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
   end
 
   create_table "transactions", force: :cascade do |t|
+    t.integer "action", null: false
     t.decimal "amount", null: false
     t.datetime "created_at", null: false
     t.string "currency", null: false
@@ -33,7 +34,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.datetime "purchase_date", null: false
     t.integer "source", null: false
     t.integer "subscription_id"
-    t.integer "type", null: false
     t.index ["created_at"], name: "index_transactions_on_created_at"
     t.index ["expires_date"], name: "index_transactions_on_expires_date"
     t.index ["external_id"], name: "index_transactions_on_external_id", unique: true

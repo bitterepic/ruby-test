@@ -110,7 +110,8 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
       "id" => subscription.id,
       "created_at" => "1990-01-01T00:00:00.000Z",
       "product_id" => products(:monthly).id,
-      "user_id" => @user_id
+      "user_id" => @user_id,
+      "last_transaction" => nil
     }, response.parsed_body)
   end
 

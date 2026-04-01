@@ -7,7 +7,7 @@ class Transaction < ApplicationRecord
 
   @@grace_period = 60.minutes
 
-  enum :type, {
+  enum :action, {
     purchase: 0,
     renew: 1,
     cancel: 3

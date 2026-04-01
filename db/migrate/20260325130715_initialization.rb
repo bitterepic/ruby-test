@@ -14,7 +14,7 @@ class Initialization < ActiveRecord::Migration[8.1]
     create_table 'transactions', force: :cascade do |t|
       t.string :external_id, null: false, index: { unique: true }, comment: "notification_uiid for APPLE"
       t.integer :source, null: false, comment: "apple or google or web"
-      t.integer :type, null: false, comment: "purchase or renew or cancel"
+      t.integer :action, null: false, comment: "purchase or renew or cancel"
       t.decimal :amount, null: false
       t.string :currency, null: false
       t.datetime :purchase_date, null: false, index: true

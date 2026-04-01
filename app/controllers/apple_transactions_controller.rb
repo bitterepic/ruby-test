@@ -1,8 +1,6 @@
 # typed: strict
 
 class AppleTransactionsController < ApplicationController
-  before_action :ensure_authenticated, :set_subscription, only: %i[ create ]
-
   extend T::Sig
 
   # Nonfatal errors where the request should still return
@@ -23,27 +21,37 @@ class AppleTransactionsController < ApplicationController
   sig { returns(String) }
   def create
     Rails.logger.info "START: #{self.class.name}"
-    raise ForbiddenError.new if (authenticated_user.has_role? "apple")
+    raise ForbiddenError.new if authenticated_user.has_role? "apple"
 
     subscription = T.let(Subscription.find(transaction_params[:transaction_id]), T.nilable(Subscription))
     raise SubscriptionNotFound.new(transaction_params) if subscription.nil?
 
-    previous_transaction = T.let(subscription.transactions.order(:created_on).first, T.nilable(Transaction))
-    transaction_params => { notification_uuid: external_id, **leftover_transaction_params }
+    previous_transaction = T.let(subscription.transactions.order(:created_at).first, T.nilable(Transaction))
+    transaction_params2 = {
+      "external_id" => transaction_params[:notification_uuid],
+      "action" => transaction_params[:type],
+      "subscription_id" => transaction_params[:transaction_id],
+      "amount" => transaction_params[:amount],
+      "currency" => transaction_params[:currency],
+      "purchase_date" => transaction_params[:purchase_date],
+      "expires_date" => transaction_params[:expires_date],
+      "source" => "apple"
+    }
 
-    already_exists = Transaction.exists?(external_id: transaction_params[:external_id])
-    raise DuplicateNotificationError.new(transaction_params) if already_exists
+    already_exists = Transaction.exists?(external_id: transaction_params2[:external_id])
+    raise DuplicateNotificationError.new(transaction_params2) if already_exists
 
-    invalid_expiration = (previous_transaction && transaction_params["type"] != "CANCEL") ? previous_transaction.expires_date >= transaction_params[:expires_date] : false
-    raise InvalidExpirationError.new(transaction_params) if invalid_expiration
+    invalid_expiration = (previous_transaction && transaction_params2["action"] != "CANCEL") ? previous_transaction.expires_date >= transaction_params2[:expires_date] : false
+    raise InvalidExpirationError.new(transaction_params2) if invalid_expiration
 
-    new_transaction = Transaction.new({ external_id:, source: "apple", **leftover_transaction_params })
+    new_transaction = Transaction.new(transaction_params2)
 
     if new_transaction.save
       Rails.logger.info "SUCCESS: #{self.class.name}"
       render json: new_transaction, status: :created, location: apple_transactions_path
     else
       Rails.logger.info "ERROR: #{self.class.name} unprocessable_content #{new_transaction.errors}"
+      new_transaction.errors.pretty_print_inspect
       render json: new_transaction.errors, status: :unprocessable_content
     end
   end
@@ -51,7 +59,16 @@ class AppleTransactionsController < ApplicationController
   private
     sig { returns(ActionController::Parameters) }
     def transaction_params
-      params.expect(transaction: [ :notification_uuid, :type, :amount, :status, :purchase_date, :expires_date ])
+      params.expect(transaction: [
+        :notification_uuid,
+        :type,
+        :transaction_id,
+        :product_id,
+        :amount,
+        :currency,
+        :purchase_date,
+        :expires_date
+    ])
     end
 
     # Webhooks and call with the same message multiple times.  Unless a fatal error happens,
