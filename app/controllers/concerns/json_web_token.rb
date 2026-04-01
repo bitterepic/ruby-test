@@ -19,7 +19,8 @@ module JsonWebToken
   def self.decode(payload)
     begin
       JWT.decode(payload, hmac_secret, true, { algorithm: "HS256" })
-    rescue JWT::DecodeError
+    rescue JWT::DecodeError =>e
+      puts("decoding error", e)
       nil
     end
   end

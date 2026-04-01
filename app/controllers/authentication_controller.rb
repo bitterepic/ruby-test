@@ -11,9 +11,9 @@ class AuthenticationController < ApplicationController
 
     if user&.authenticate(params[:password])
       token = encode_token({ id: user.id })
-      render json: { token: token }, status: :ok
+      render json: { token: token, **user.as_json }, status: :ok
     else
-      throw UnauthenticatedError.new
+      throw UnauthorizedError.new
     end
   end
 

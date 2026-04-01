@@ -19,16 +19,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
   create_table "subscriptions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "product_id"
-    t.string "transaction_id", null: false
     t.integer "user_id"
     t.index ["product_id"], name: "index_subscriptions_on_product_id"
-    t.index ["transaction_id"], name: "index_subscriptions_on_transaction_id", unique: true
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
     t.decimal "amount", null: false
     t.datetime "created_at", null: false
+    t.string "currency", null: false
     t.datetime "expires_date", null: false
     t.string "external_id", null: false
     t.datetime "purchase_date", null: false

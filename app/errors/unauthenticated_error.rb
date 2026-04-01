@@ -1,2 +1,0 @@
-class UnauthenticatedError < StandardError 
-end

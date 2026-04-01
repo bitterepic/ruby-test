@@ -6,7 +6,6 @@ class Initialization < ActiveRecord::Migration[8.1]
     create_table 'subscriptions', force: :cascade do |t|
       t.belongs_to :user, index: true, foreign_key: true, comment: "The user that owns this subscription"
       t.belongs_to :product, index: true, foreign_key: true, comment: "The product this subscription represents"
-      t.string :transaction_id, null: false, index: { unique: true }, comment: "External ID, like from apple"
       t.datetime :created_at, null: false
     end
   end
@@ -17,6 +16,7 @@ class Initialization < ActiveRecord::Migration[8.1]
       t.integer :source, null: false, comment: "apple or google or web"
       t.integer :type, null: false, comment: "purchase or renew or cancel"
       t.decimal :amount, null: false
+      t.string :currency, null: false
       t.datetime :purchase_date, null: false, index: true
       t.datetime :expires_date, null: false, index: true
       t.datetime :created_at, null: false, index: true

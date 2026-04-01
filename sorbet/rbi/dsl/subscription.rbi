@@ -828,9 +828,6 @@ class Subscription
     def restore_product_id!; end
 
     sig { void }
-    def restore_transaction_id!; end
-
-    sig { void }
     def restore_user_id!; end
 
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
@@ -857,62 +854,11 @@ class Subscription
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_product_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable([::String, ::String])) }
-    def saved_change_to_transaction_id; end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def saved_change_to_transaction_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_user_id; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_user_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(::String) }
-    def transaction_id; end
-
-    sig { params(value: ::String).returns(::String) }
-    def transaction_id=(value); end
-
-    sig { returns(T::Boolean) }
-    def transaction_id?; end
-
-    sig { returns(T.nilable(::String)) }
-    def transaction_id_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def transaction_id_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def transaction_id_came_from_user?; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def transaction_id_change; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def transaction_id_change_to_be_saved; end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def transaction_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::String)) }
-    def transaction_id_in_database; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def transaction_id_previous_change; end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def transaction_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::String)) }
-    def transaction_id_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def transaction_id_was; end
-
-    sig { void }
-    def transaction_id_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
     def user_id; end
@@ -970,9 +916,6 @@ class Subscription
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_product_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def will_save_change_to_transaction_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_user_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end

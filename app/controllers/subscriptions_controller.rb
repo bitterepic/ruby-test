@@ -1,7 +1,7 @@
 # typed: strict
 
 class SubscriptionsController < ApplicationController
-  before_action :ensure_authenticated, :set_subscription, only: %i[ show ]
+  before_action :set_subscription, only: %i[ show ]
 
   extend T::Sig
 
@@ -39,14 +39,16 @@ class SubscriptionsController < ApplicationController
   private
     sig { void }
     def set_subscription
-      @subscription = Subscription.find(params.expect(:id))
-      throw ForbiddenError.new if (@subscription.user_id != authenticated_user.id)
+      out = Subscription.where(id: params.expect(:id)).first
+      raise ForbiddenError.new if out && out.user_id != authenticated_user.id
+      @subscription = out
     end
 
-    sig { returns(Subscription) }
+    sig { returns(T.nilable(Subscription)) }
     def subscription
-      throw NotFoundError.new if @subscription.nil?
-      @subscription
+      out = @subscription
+      raise NotFoundError.new if out.nil?
+      out
     end
 
     sig { returns(ActionController::Parameters) }
