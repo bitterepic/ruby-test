@@ -26,7 +26,16 @@ class AppleTransactionsController < ApplicationController
     subscription = T.let(Subscription.find(transaction_params[:transaction_id]), T.nilable(Subscription))
     raise SubscriptionNotFound.new(transaction_params) if subscription.nil?
 
-    previous_transaction = T.let(subscription.transactions.order(:created_at).first, T.nilable(Transaction))
+    previous_transaction = subscription.transactions.order(created_at: :asc).select(
+      :id,
+      :action,
+      :created_at,
+      :currency,
+      :expires_date,
+      :external_id,
+      :purchase_date,
+      :source
+    ).last
     transaction_params2 = {
       "external_id" => transaction_params[:notification_uuid],
       "action" => transaction_params[:type],
@@ -38,11 +47,15 @@ class AppleTransactionsController < ApplicationController
       "source" => "apple"
     }
 
-    already_exists = Transaction.exists?(external_id: transaction_params2[:external_id])
+    already_exists = Transaction.exists?(external_id: transaction_params2["external_id"])
     raise DuplicateNotificationError.new(transaction_params2) if already_exists
 
+    already_cancelled = (
+      transaction_params2["action"] == "cancel" && previous_transaction&.action == "cancel"
+    )
+    raise InvalidExpirationError.new(transaction_params2) if already_cancelled
     invalid_expiration = (
-      previous_transaction && transaction_params2[:purchace_date] && previous_transaction.expires_date >= transaction_params2[:purchase_date]
+      previous_transaction && transaction_params2["purchase_date"] && previous_transaction.expires_date > DateTime.parse(transaction_params2["purchase_date"])
     )
     raise InvalidExpirationError.new(transaction_params2) if invalid_expiration
 
@@ -80,8 +93,8 @@ class AppleTransactionsController < ApplicationController
       backtrace = exception.backtrace
       backtraceString = backtrace.join("\n") if !backtrace.nil?
 
-      Rails.logger.error "ERROR: #{self.class.name} #{exception.class.name}: #{exception}", backtraceString
+      Rails.logger.error "ERROR: #{self.class.name} #{exception.class.name}: #{exception}\n #{backtraceString}"
 
-      render nothing: true, status: :success, location: "/webhooks/apple/transaction"
+      render json: { message: "Errored" }, status: :created, location: "/webhooks/apple/transaction"
     end
 end
