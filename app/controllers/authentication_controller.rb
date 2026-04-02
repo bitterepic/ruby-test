@@ -13,7 +13,7 @@ class AuthenticationController < ApplicationController
       token = encode_token({ id: user.id })
       render json: { token: token, **user.as_json }, status: :ok
     else
-      throw UnauthorizedError.new
+      raise ForbiddenError.new
     end
   end
 

@@ -18,6 +18,9 @@ class Transaction
   def to_ary; end
 
   class << self
+    sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
+    def actions; end
+
     sig do
       params(
         attributes: T.untyped,
@@ -28,9 +31,6 @@ class Transaction
 
     sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
     def sources; end
-
-    sig { returns(T::Hash[T.any(String, Symbol), Integer]) }
-    def types; end
   end
 
   module CommonRelationMethods
@@ -646,6 +646,51 @@ class Transaction
   end
 
   module GeneratedAttributeMethods
+    sig { returns(::String) }
+    def action; end
+
+    sig { params(value: T.any(::String, ::Symbol, ::Integer)).returns(T.any(::String, ::Symbol, ::Integer)) }
+    def action=(value); end
+
+    sig { returns(T::Boolean) }
+    def action?; end
+
+    sig { returns(T.nilable(::String)) }
+    def action_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def action_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def action_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def action_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def action_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def action_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def action_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def action_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def action_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def action_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def action_was; end
+
+    sig { void }
+    def action_will_change!; end
+
     sig { returns(::BigDecimal) }
     def amount; end
 
@@ -735,6 +780,51 @@ class Transaction
 
     sig { void }
     def created_at_will_change!; end
+
+    sig { returns(::String) }
+    def currency; end
+
+    sig { params(value: ::String).returns(::String) }
+    def currency=(value); end
+
+    sig { returns(T::Boolean) }
+    def currency?; end
+
+    sig { returns(T.nilable(::String)) }
+    def currency_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def currency_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def currency_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def currency_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def currency_change_to_be_saved; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def currency_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def currency_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def currency_previous_change; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def currency_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def currency_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def currency_was; end
+
+    sig { void }
+    def currency_will_change!; end
 
     sig { returns(::ActiveSupport::TimeWithZone) }
     def expires_date; end
@@ -962,10 +1052,16 @@ class Transaction
     def purchase_date_will_change!; end
 
     sig { void }
+    def restore_action!; end
+
+    sig { void }
     def restore_amount!; end
 
     sig { void }
     def restore_created_at!; end
+
+    sig { void }
+    def restore_currency!; end
 
     sig { void }
     def restore_expires_date!; end
@@ -988,8 +1084,11 @@ class Transaction
     sig { void }
     def restore_subscription_id!; end
 
-    sig { void }
-    def restore_type!; end
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_action; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_action?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([::BigDecimal, ::BigDecimal])) }
     def saved_change_to_amount; end
@@ -1002,6 +1101,12 @@ class Transaction
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_created_at?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_currency; end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_currency?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_expires_date; end
@@ -1044,12 +1149,6 @@ class Transaction
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_subscription_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def saved_change_to_type; end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def saved_change_to_type?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(::String) }
     def source; end
@@ -1141,56 +1240,17 @@ class Transaction
     sig { void }
     def subscription_id_will_change!; end
 
-    sig { returns(::String) }
-    def type; end
-
-    sig { params(value: T.any(::String, ::Symbol, ::Integer)).returns(T.any(::String, ::Symbol, ::Integer)) }
-    def type=(value); end
-
-    sig { returns(T::Boolean) }
-    def type?; end
-
-    sig { returns(T.nilable(::String)) }
-    def type_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def type_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def type_came_from_user?; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def type_change; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def type_change_to_be_saved; end
-
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def type_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::String)) }
-    def type_in_database; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def type_previous_change; end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def type_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::String)) }
-    def type_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def type_was; end
-
-    sig { void }
-    def type_will_change!; end
+    def will_save_change_to_action?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_amount?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_created_at?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_currency?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_expires_date?(from: T.unsafe(nil), to: T.unsafe(nil)); end
@@ -1212,9 +1272,6 @@ class Transaction
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def will_save_change_to_subscription_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
-    def will_save_change_to_type?(from: T.unsafe(nil), to: T.unsafe(nil)); end
   end
 
   module GeneratedRelationMethods

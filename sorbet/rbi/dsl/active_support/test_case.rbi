@@ -21,6 +21,16 @@ class ActiveSupport::TestCase
   end
   def subscriptions(fixture_name = nil, *other_fixtures); end
 
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[Transaction]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Transaction) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[Transaction])
+  end
+  def transactions(fixture_name = nil, *other_fixtures); end
+
   sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[User]) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(User) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: T.any(String, Symbol)).returns(T::Array[User]) }

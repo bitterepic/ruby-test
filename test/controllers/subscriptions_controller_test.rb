@@ -10,25 +10,8 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
     # Set our testing timestamp
     Timecop.freeze(DateTime.new(1990).utc)
 
-    # Create the user
-    post "/register", params: {
-      email: "test@example.com",
-      family_name: "test family name",
-      given_name: "test given name",
-      password: "012345678"
-    }, as: :json
-
-    assert_response :success
-
-    post "/login", params: {
-      email: "test@example.com",
-      password: "012345678"
-    }, as: :json
-
-    @token = T.let(response.parsed_body["token"], String)
-    @user_id = T.let(response.parsed_body["id"], Integer)
-
-    assert_response :success
+    register
+    login
   end
 
   teardown do
