@@ -41,14 +41,16 @@ class AppleTransactionsController < ApplicationController
     already_exists = Transaction.exists?(external_id: transaction_params2[:external_id])
     raise DuplicateNotificationError.new(transaction_params2) if already_exists
 
-    invalid_expiration = (previous_transaction && transaction_params2["action"] != "CANCEL") ? previous_transaction.expires_date >= transaction_params2[:expires_date] : false
+    invalid_expiration = (
+      previous_transaction && transaction_params2[:purchace_date] && previous_transaction.expires_date >= transaction_params2[:purchase_date]
+    )
     raise InvalidExpirationError.new(transaction_params2) if invalid_expiration
 
     new_transaction = Transaction.new(transaction_params2)
 
     if new_transaction.save
       Rails.logger.info "SUCCESS: #{self.class.name}"
-      render json: new_transaction, status: :created, location: apple_transactions_path
+      render json: { transaction: new_transaction }, status: :created, location: apple_transactions_path
     else
       Rails.logger.info "ERROR: #{self.class.name} unprocessable_content #{new_transaction.errors}"
       new_transaction.errors.pretty_print_inspect

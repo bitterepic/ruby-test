@@ -26,12 +26,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "action", null: false
-    t.decimal "amount", null: false
+    t.decimal "amount"
     t.datetime "created_at", null: false
-    t.string "currency", null: false
+    t.string "currency"
     t.datetime "expires_date", null: false
     t.string "external_id", null: false
-    t.datetime "purchase_date", null: false
+    t.datetime "purchase_date"
     t.integer "source", null: false
     t.integer "subscription_id"
     t.index ["created_at"], name: "index_transactions_on_created_at"

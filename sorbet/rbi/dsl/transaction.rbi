@@ -691,10 +691,10 @@ class Transaction
     sig { void }
     def action_will_change!; end
 
-    sig { returns(::BigDecimal) }
+    sig { returns(T.nilable(::BigDecimal)) }
     def amount; end
 
-    sig { params(value: ::BigDecimal).returns(::BigDecimal) }
+    sig { params(value: T.nilable(::BigDecimal)).returns(T.nilable(::BigDecimal)) }
     def amount=(value); end
 
     sig { returns(T::Boolean) }
@@ -709,10 +709,10 @@ class Transaction
     sig { returns(T::Boolean) }
     def amount_came_from_user?; end
 
-    sig { returns(T.nilable([::BigDecimal, ::BigDecimal])) }
+    sig { returns(T.nilable([T.nilable(::BigDecimal), T.nilable(::BigDecimal)])) }
     def amount_change; end
 
-    sig { returns(T.nilable([::BigDecimal, ::BigDecimal])) }
+    sig { returns(T.nilable([T.nilable(::BigDecimal), T.nilable(::BigDecimal)])) }
     def amount_change_to_be_saved; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -721,7 +721,7 @@ class Transaction
     sig { returns(T.nilable(::BigDecimal)) }
     def amount_in_database; end
 
-    sig { returns(T.nilable([::BigDecimal, ::BigDecimal])) }
+    sig { returns(T.nilable([T.nilable(::BigDecimal), T.nilable(::BigDecimal)])) }
     def amount_previous_change; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -781,10 +781,10 @@ class Transaction
     sig { void }
     def created_at_will_change!; end
 
-    sig { returns(::String) }
+    sig { returns(T.nilable(::String)) }
     def currency; end
 
-    sig { params(value: ::String).returns(::String) }
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
     def currency=(value); end
 
     sig { returns(T::Boolean) }
@@ -799,10 +799,10 @@ class Transaction
     sig { returns(T::Boolean) }
     def currency_came_from_user?; end
 
-    sig { returns(T.nilable([::String, ::String])) }
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def currency_change; end
 
-    sig { returns(T.nilable([::String, ::String])) }
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def currency_change_to_be_saved; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -811,7 +811,7 @@ class Transaction
     sig { returns(T.nilable(::String)) }
     def currency_in_database; end
 
-    sig { returns(T.nilable([::String, ::String])) }
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def currency_previous_change; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -1006,10 +1006,10 @@ class Transaction
     sig { void }
     def id_will_change!; end
 
-    sig { returns(::ActiveSupport::TimeWithZone) }
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def purchase_date; end
 
-    sig { params(value: ::ActiveSupport::TimeWithZone).returns(::ActiveSupport::TimeWithZone) }
+    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def purchase_date=(value); end
 
     sig { returns(T::Boolean) }
@@ -1024,10 +1024,10 @@ class Transaction
     sig { returns(T::Boolean) }
     def purchase_date_came_from_user?; end
 
-    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def purchase_date_change; end
 
-    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def purchase_date_change_to_be_saved; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -1036,7 +1036,7 @@ class Transaction
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def purchase_date_in_database; end
 
-    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def purchase_date_previous_change; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -1090,7 +1090,7 @@ class Transaction
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_action?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable([::BigDecimal, ::BigDecimal])) }
+    sig { returns(T.nilable([T.nilable(::BigDecimal), T.nilable(::BigDecimal)])) }
     def saved_change_to_amount; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -1102,7 +1102,7 @@ class Transaction
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_created_at?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable([::String, ::String])) }
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_currency; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
@@ -1132,7 +1132,7 @@ class Transaction
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def saved_change_to_id_value?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_purchase_date; end
 
     sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }

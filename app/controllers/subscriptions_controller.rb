@@ -21,16 +21,17 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1
   sig { returns(String) }
   def show
-    last_transaction = subscription.transactions.select(
-      :id, 
-      :action, 
-      :created_at, 
-      :currency, 
-      :expires_date, 
-      :external_id, 
-      :purchase_date, 
+    last_transaction = subscription.transactions.order(created_at: :asc).select(
+      :id,
+      :action,
+      :created_at,
+      :currency,
+      :expires_date,
+      :external_id,
+      :purchase_date,
       :source
-    ).order(:created_at).first.as_json
+    ).last.as_json
+
     render json: { **subscription.as_json, last_transaction:  }
   end
 
