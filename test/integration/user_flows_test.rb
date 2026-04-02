@@ -27,7 +27,7 @@ class UserFlowsTest < Testing::IntegrationTest
 
   sig { params(product_id: Integer).returns(Integer) }
   def create_subscription(product_id)
-    post subscriptions_path, params: {
+    post v1_subscriptions_path, params: {
       subscription: { product_id: }
     }, headers: @headers, as: :json
     assert_response :created
@@ -43,7 +43,7 @@ class UserFlowsTest < Testing::IntegrationTest
   def purchase(product_id, subscription_id, purchase_date, expires_date)
     @tranaction_increment += 1
     Timecop.freeze(DateTime.new(1990).utc + @tranaction_increment.minute) do
-      post apple_transactions_path, params: {
+      post v1_apple_transactions_path, params: {
         transaction: {
           "notification_uuid": @tranaction_increment,
           "type": "purchase",
@@ -71,7 +71,7 @@ class UserFlowsTest < Testing::IntegrationTest
   def renew(product_id, subscription_id, purchase_date, expires_date)
     @tranaction_increment += 1
     Timecop.freeze(DateTime.new(1990).utc + @tranaction_increment.minute) do
-      post apple_transactions_path, params: {
+      post v1_apple_transactions_path, params: {
         transaction: {
           "notification_uuid": @tranaction_increment,
           "type": "renew",
@@ -99,7 +99,7 @@ class UserFlowsTest < Testing::IntegrationTest
   def cancel(product_id, subscription_id, purchase_date, expires_date)
     @tranaction_increment += 1
     Timecop.freeze(DateTime.new(1990).utc + @tranaction_increment.minute) do
-      post apple_transactions_path, params: {
+      post v1_apple_transactions_path, params: {
         transaction: {
           "notification_uuid": @tranaction_increment,
           "type": "cancel",
@@ -119,7 +119,7 @@ class UserFlowsTest < Testing::IntegrationTest
     product_id = products(:monthly).id
     subscription_id = create_subscription product_id
 
-    get subscription_path(subscription_id), headers: @headers, as: :json
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
 
     assert_equal({
@@ -136,7 +136,7 @@ class UserFlowsTest < Testing::IntegrationTest
     subscription_id = create_subscription product_id
     purchase_transaction_id = purchase(product_id, subscription_id, "2025-01-01T12:00:00.000Z", "2025-02-01T12:00:00.000Z")
 
-    get subscription_path(subscription_id), headers: @headers, as: :json
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
 
     assert_equal({
@@ -173,7 +173,7 @@ class UserFlowsTest < Testing::IntegrationTest
       "2025-03-01T12:00:00.000Z"
     )
 
-    get subscription_path(subscription_id), headers: @headers, as: :json
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
 
     assert_equal({
@@ -210,7 +210,7 @@ class UserFlowsTest < Testing::IntegrationTest
       "2025-02-01T12:00:00.000Z"
     )
 
-    get subscription_path(subscription_id), headers: @headers, as: :json
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
 
     assert_equal({
@@ -253,7 +253,7 @@ class UserFlowsTest < Testing::IntegrationTest
       "2025-03-01T12:00:00.000Z"
     )
 
-    get subscription_path(subscription_id), headers: @headers, as: :json
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
 
     assert_equal({
@@ -290,7 +290,7 @@ class UserFlowsTest < Testing::IntegrationTest
       "2025-02-11T12:00:00.000Z"
     )
 
-    get subscription_path(subscription_id), headers: @headers, as: :json
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
     {
       "id" => 904941505, 

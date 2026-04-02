@@ -1,6 +1,6 @@
 # typed: strict
 
-class AppleTransactionsController < ApplicationController
+class V1::AppleTransactionsController < ApplicationController
   extend T::Sig
 
   # Nonfatal errors where the request should still return
@@ -63,7 +63,7 @@ class AppleTransactionsController < ApplicationController
 
     if new_transaction.save
       Rails.logger.info "SUCCESS: #{self.class.name}"
-      render json: { transaction: new_transaction }, status: :created, location: apple_transactions_path
+      render json: { transaction: new_transaction }, status: :created, location: v1_apple_transactions_path
     else
       Rails.logger.info "ERROR: #{self.class.name} unprocessable_content #{new_transaction.errors}"
       new_transaction.errors.pretty_print_inspect

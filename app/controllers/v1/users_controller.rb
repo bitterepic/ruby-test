@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class V1::UsersController < ApplicationController
   skip_before_action :ensure_authenticated, only: :create
 
   def create

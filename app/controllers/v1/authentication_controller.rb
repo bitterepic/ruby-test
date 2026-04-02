@@ -1,8 +1,8 @@
 # typed: true
 
-require_relative "concerns/json_web_token"
+require_relative "../concerns/json_web_token"
 
-class AuthenticationController < ApplicationController
+class V1::AuthenticationController < ApplicationController
   skip_before_action :ensure_authenticated
 
   def login

@@ -22,7 +22,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
     subscription = Subscription.new(product: products(:monthly), user_id: @user_id)
     subscription.save
 
-    get "/subscriptions", headers: { Authorization: "Bearer #{@token}" }, as: :json
+    get v1_subscriptions_path, headers: { Authorization: "Bearer #{@token}" }, as: :json
     assert_response :success
     assert_equal [ {
       "id" => subscription.id,
@@ -36,14 +36,14 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
     subscription = Subscription.new(product: products(:monthly), user_id: @user_id)
     subscription.save
 
-    get "/subscriptions", as: :json
+    get v1_subscriptions_path, as: :json
     assert_response :unauthorized
   end
 
   test "should not create subscription when unauthorized" do
     product = products(:monthly)
 
-    post "/subscriptions", params: {
+    post v1_subscriptions_path, params: {
       subscription: { product_id: product.id }
     }, as: :json
 
@@ -59,7 +59,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
   test "should create subscription" do
     product = products(:monthly)
 
-    post "/subscriptions", params: {
+    post v1_subscriptions_path, params: {
       subscription: { product_id: product.id }
     }, headers: { Authorization: "Bearer #{@token}" }, as: :json
 
@@ -78,7 +78,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
 
   test "can't show subscription by other user" do
     subscription = subscriptions(:basic_subscription)
-    get subscription_url(subscription.id), headers: { Authorization: "Bearer #{@token}" }, as: :json
+    get v1_subscription_url(subscription.id), headers: { Authorization: "Bearer #{@token}" }, as: :json
     assert_response :forbidden
   end
 
@@ -86,7 +86,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
     subscription = Subscription.new(user_id: @user_id, product: products(:monthly))
     subscription.save
 
-    get subscription_url(subscription.id), headers: { Authorization: "Bearer #{@token}" }, as: :json
+    get v1_subscription_url(subscription.id), headers: { Authorization: "Bearer #{@token}" }, as: :json
     assert_response :success
 
     assert_equal({
@@ -100,7 +100,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
 
   test "can't show when doesn't exist" do
     subscription = subscriptions(:basic_subscription)
-    get subscription_url(10000), headers: { Authorization: "Bearer #{@token}" }, as: :json
+    get v1_subscription_url(10000), headers: { Authorization: "Bearer #{@token}" }, as: :json
     assert_response :not_found
   end
 end

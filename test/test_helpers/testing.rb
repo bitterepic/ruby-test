@@ -72,7 +72,7 @@ module Testing
       given_name = "test given name",
       password = "012345678"
     )
-      out = post "/register", params: {
+      out = post "/v1/register", params: {
         email:,
         family_name:,
         given_name:,
@@ -106,7 +106,7 @@ module Testing
 
     sig { params(email: String, password: String).returns(LoginResponseType) }
     def login(email = "test@example.com", password = "012345678")
-      out = post "/login", params: {
+      out = post "/v1/login", params: {
         email:,
         password:
       }, as: :json

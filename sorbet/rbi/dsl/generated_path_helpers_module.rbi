@@ -10,12 +10,6 @@ module GeneratedPathHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
-  def apple_transactions_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def login_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -103,20 +97,26 @@ module GeneratedPathHelpersModule
   def rails_storage_redirect_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def register_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def subscription_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def subscriptions_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def user_path(*args); end
+  def v1_apple_transactions_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def users_path(*args); end
+  def v1_login_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_register_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_subscription_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_subscriptions_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_user_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_users_path(*args); end
 end

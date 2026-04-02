@@ -10,12 +10,6 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
-  def apple_transactions_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def login_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -103,20 +97,26 @@ module GeneratedUrlHelpersModule
   def rails_storage_redirect_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def register_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def subscription_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def subscriptions_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def user_url(*args); end
+  def v1_apple_transactions_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def users_url(*args); end
+  def v1_login_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_register_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_subscription_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_subscriptions_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_user_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def v1_users_url(*args); end
 end
