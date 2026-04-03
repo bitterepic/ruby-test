@@ -112,6 +112,7 @@ GEM
     et-orbi (1.4.0)
       tzinfo
     ffi (1.17.4-arm64-darwin)
+    ffi (1.17.4-x86_64-linux-gnu)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -180,6 +181,8 @@ GEM
     netrc (0.11.0)
     nio4r (2.7.5)
     nokogiri (1.19.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.19.2-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.3)
     parallel (1.27.0)
@@ -316,6 +319,7 @@ GEM
       sorbet-static (= 0.6.13066)
     sorbet-runtime (0.6.13066)
     sorbet-static (0.6.13066-universal-darwin)
+    sorbet-static (0.6.13066-x86_64-linux)
     sorbet-static-and-runtime (0.6.13066)
       sorbet (= 0.6.13066)
       sorbet-runtime (= 0.6.13066)
@@ -328,6 +332,7 @@ GEM
       sorbet-static-and-runtime (>= 0.5.10187)
       thor (>= 0.19.2)
     sqlite3 (2.9.2-arm64-darwin)
+    sqlite3 (2.9.2-x86_64-linux-gnu)
     sshkit (1.25.0)
       base64
       logger
@@ -350,6 +355,7 @@ GEM
       yard-sorbet
     thor (1.5.0)
     thruster (0.1.20-arm64-darwin)
+    thruster (0.1.20-x86_64-linux)
     timecop (0.9.10)
     timeout (0.6.1)
     tsort (0.2.0)
@@ -373,6 +379,7 @@ GEM
 PLATFORMS
   arm64-darwin
   universal-darwin
+  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.16)
@@ -439,6 +446,7 @@ CHECKSUMS
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   et-orbi (1.4.0) sha256=6c7e3c90779821f9e3b324c5e96fda9767f72995d6ae435b96678a4f3e2de8bc
   ffi (1.17.4-arm64-darwin) sha256=19071aaf1419251b0a46852abf960e77330a3b334d13a4ab51d58b31a937001b
+  ffi (1.17.4-x86_64-linux-gnu) sha256=9d3db14c2eae074b382fa9c083fe95aec6e0a1451da249eab096c34002bc752d
   fugit (1.12.1) sha256=5898f478ede9b415f0804e42b8f3fd53f814bd85eebffceebdbc34e1107aaf68
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
@@ -469,6 +477,7 @@ CHECKSUMS
   netrc (0.11.0) sha256=de1ce33da8c99ab1d97871726cba75151113f117146becbe45aa85cb3dabee3f
   nio4r (2.7.5) sha256=6c90168e48fb5f8e768419c93abb94ba2b892a1d0602cb06eef16d8b7df1dca1
   nokogiri (1.19.2-arm64-darwin) sha256=58d8ea2e31a967b843b70487a44c14c8ba1866daa1b9da9be9dbdf1b43dee205
+  nokogiri (1.19.2-x86_64-linux-gnu) sha256=fa8feca882b73e871a9845f3817a72e9734c8e974bdc4fbad6e4bc6e8076b94f
   ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
   parallel (1.27.0) sha256=4ac151e1806b755fb4e2dc2332cbf0e54f2e24ba821ff2d3dcf86bf6dc4ae130
   parser (3.3.11.1) sha256=d17ace7aabe3e72c3cc94043714be27cc6f852f104d81aa284c2281aecc65d54
@@ -513,14 +522,17 @@ CHECKSUMS
   sorbet (0.6.13066) sha256=01ce6141490dfc1363e49db1aeb376c5290e9324047cb321df6a1f0fc7fe0752
   sorbet-runtime (0.6.13066) sha256=f11fd181b013ea00e7faa071be61e6ec472a4413267e6aca1e10b90651a808a9
   sorbet-static (0.6.13066-universal-darwin) sha256=8c6eabc97641cd37b41715ddaf99d0bbc87843cdb29f891fb2e350ebb49b4fc1
+  sorbet-static (0.6.13066-x86_64-linux) sha256=f1153a44c03fce427e1ffdf017e88500fdc14599dec8cbcaa82c6c996eb2d3af
   sorbet-static-and-runtime (0.6.13066) sha256=e1f25047efc3eb002207d74c1843851e3f7ad6732e9123a2ddf672d16933efac
   spoom (1.7.11) sha256=4e27384af6d3fde5aadc0287c51e6f76c0802259cbb3b6a67603bf718352f4cf
   sqlite3 (2.9.2-arm64-darwin) sha256=d15bd9609a05f9d54930babe039585efc8cadd57517c15b64ec7dfa75158a5e9
+  sqlite3 (2.9.2-x86_64-linux-gnu) sha256=dce83ffcb7e72f9f7aeb6e5404f15d277a45332fe18ccce8a8b3ed51e8d23aee
   sshkit (1.25.0) sha256=c8c6543cdb60f91f1d277306d585dd11b6a064cb44eab0972827e4311ff96744
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
   tapioca (0.18.0) sha256=6e92516b055e727792c84319d4be59438345b2c11e932495a54636fc043e7dc1
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   thruster (0.1.20-arm64-darwin) sha256=630cf8c273f562063b92ea5ccd7a721d7ba6130cc422c823727f4744f6d0770e
+  thruster (0.1.20-x86_64-linux) sha256=d579f252bf67aee6ba6d957e48f566b72e019d7657ba2f267a5db1e4d91d2479
   timecop (0.9.10) sha256=12ba45ce57cdcf6b1043cb6cdffa6381fd89ce10d369c28a7f6f04dc1b0cd8eb
   timeout (0.6.1) sha256=78f57368a7e7bbadec56971f78a3f5ecbcfb59b7fcbb0a3ed6ddc08a5094accb
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
