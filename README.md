@@ -55,7 +55,7 @@ FUTURE: There is an enum to describe where the transaction source.  It currently
 ## API
 
 APIs are scoped by version.  You can find details on how to call the API in
-the controllers. TODO: Add swagger docks in the future.
+the controllers. TODO: Add swagger docs in the future.
 
 ### Subscriptions
 
