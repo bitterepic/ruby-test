@@ -54,6 +54,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "rubocop", require: false
+
+  gem 'rails-erd'
 end
 
 gem "bcrypt", "~> 3.1"

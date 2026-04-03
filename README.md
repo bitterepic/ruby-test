@@ -1,34 +1,100 @@
+# Ruby Test
 
-Issue with steep
-https://github.com/soutaro/steep/issues/2173
+This is a backend implementation to demonstrate basic subscription workflows.  It leverages [Ruby on Rails](https://rubyonrails.org/) with [Sorbet](https://sorbet.org/) for type checking.  Sorbet is primarily useful for helping to verify correctness and to make the code "self documenting" for other developers which is more difficult with doc comments alone.
+
+## Setup
+
+1. Install [Rails](https://guides.rubyonrails.org/install_ruby_on_rails.html) for your basic setup.  After running bundle you will have your available commands. I recommend using aliases to reduce typing of commands.
+
+2. Add [Sorbet](https://sorbet.org/docs/vscode) and [Rubocop](https://docs.rubocop.org/rubocop/latest/integration_with_other_tools.html) to your IDE.
+
+3. Add command aliases so you don't need to repeatedly type `bundle exec`.
+
+For macOS or Linux, Add this to your `~/.zprofile` or `~/.bash_profile`:
+
+```sh
+alias tapioca="bundle exec tapioca"
+alias rails="bundle exec rails"
+alias srb="bundle exec srb"
+```
+
+And then reload your terminal.  You should now be able to type `tapioca`, `rails`, or `srb` for
+the respective commands.
+
+4. Initialize your database with `rails db:migrate:reset`
+
+5. When making changes to the db or your models update your sorbet types with `tapioca dsl`.  If you add a gem, run `tapioca gem`.  This will allow correct completion and type checking.
+
+## Database
+
+![model diagram](docs/database.png)
+
+There are 4 primary data types in the application.
+
+### User
+
+The users of the system.  Apple web hooks have a role of "apple"
+given access to the `/v1/webhooks/apple/transaction` api.
+
+### Product
+
+A product that can be subscribed to, such as a monthly subscription.
+
+### Subscription
+
+A subscription that a user has created.  It can be in a purchased, cancelled, or renewed state based off of the last executed transaction.  Apple transactions are created through the apple webhook. When there are no transactions, the subscription is not yet active.
+
+### Transaction
+
+A record of actions by the user used for finding the current subscription state as well as for viewing a history of previous transactions.
+
+Transactions must be sequential into the future and never overlap.
+
+FUTURE: There is an enum to describe where the transaction source.  It currently only supports "apple", but "google" and "web" are future possible payment sources.
+
+## API
+
+APIs are scoped by version.  You can find details on how to call the API in
+the controllers. TODO: Add swagger docks in the future.
+
+### Subscriptions
+
+#### POST /v1/subscriptions
+
+Create a new subscription
+
+#### GET /v1/subscriptions
+
+List created subscriptions.
+
+#### GET /v1/subscriptions/:id
+
+Get the detail of one subscription.
+
+### Authentication
+
+#### POST /v1/register
+
+Register a new user
+
+#### POST /v1/login
+
+Authenticate with a registered user.
+
+### Webhooks
+
+#### POST /v1/webhooks/apple/transactions
+
+Create a new transaction on a subscription. A subscription will not be active until a purchase transaction has been created.
+
+Internally, this api maps transaction_id to subscription_id and `notification_uuid` to `extenal_id` in the database.
+
+### Testing
+
+Run tests with `rails test`.  Each controller has its own set of tests in `test/controllers`, and there are user flow tests in `test/integration`.
 
 
-https://github.com/voormedia/rails-erd
 
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-- Ruby version
-
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
 
 # サブスクリプション管理システムの実装
 
