@@ -231,6 +231,49 @@ class UserFlowsTest < Testing::IntegrationTest
     }, response.parsed_body)
   end
 
+  test "renew a subscription after canceled" do
+    product_id = products(:monthly).id
+    subscription_id = create_subscription product_id
+    purchase_transaction_id = purchase(
+      product_id,
+      subscription_id,
+      "2025-01-01T12:00:00.000Z",
+      "2025-02-01T12:00:00.000Z"
+    )
+    cancel_transaction_id = cancel(
+      product_id,
+      subscription_id,
+      "2025-01-01T12:00:00.000Z",
+      "2025-02-01T12:00:00.000Z"
+    )
+    renew_transaction_id = renew(
+      product_id,
+      subscription_id,
+      "2025-02-01T12:00:00.000Z",
+      "2025-03-01T12:00:00.000Z"
+    )
+
+    get v1_subscription_path(subscription_id), headers: @headers, as: :json
+    assert_response :success
+
+    assert_equal({
+      "id" => subscription_id,
+      "created_at" => "1990-01-01T00:00:00.000Z",
+      "product_id" => product_id,
+      "user_id" => @user_id,
+      "last_transaction" => {
+        "id" => renew_transaction_id, 
+        "action" => "renew", 
+        "created_at" => "1990-01-01T00:03:00.000Z", 
+        "currency" => "USD", 
+        "expires_date" => "2025-03-01T12:00:00.000Z", 
+        "external_id" => "3", 
+        "purchase_date" => "2025-02-01T12:00:00.000Z", 
+        "source" => "apple"
+      }
+    }, response.parsed_body)
+  end
+
   test "can't cancel twice" do
     product_id = products(:monthly).id
     subscription_id = create_subscription product_id

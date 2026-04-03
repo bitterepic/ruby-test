@@ -93,8 +93,7 @@ Internally, this api maps transaction_id to subscription_id and `notification_uu
 
 Run tests with `rails test`.  Each controller has its own set of tests in `test/controllers`, and there are user flow tests in `test/integration`.
 
-
-
+The `test/test_helpers/testing.rb` module is used to automate some repetitious tasks, such as registering a user and logging in.
 
 # サブスクリプション管理システムの実装
 
