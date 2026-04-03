@@ -16,6 +16,7 @@ For macOS or Linux, Add this to your `~/.zprofile` or `~/.bash_profile`:
 alias tapioca="bundle exec tapioca"
 alias rails="bundle exec rails"
 alias srb="bundle exec srb"
+alias rubocop="bundle exec rubocop"
 ```
 
 And then reload your terminal.  You should now be able to type `tapioca`, `rails`, or `srb` for
