@@ -1,2 +1,2 @@
-class ForbiddenError < StandardError 
+class ForbiddenError < StandardError
 end

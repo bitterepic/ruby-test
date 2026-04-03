@@ -1,2 +1,2 @@
-class UnauthorizedError < StandardError 
+class UnauthorizedError < StandardError
 end
