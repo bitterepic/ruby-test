@@ -1,2 +1,14 @@
 # Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_gem: { 
+  rubocop-rails-omakase: rubocop.yml,
+}
+
+plugins:
+  - rubocop-rspec
+
+RSpec/IncludeExamples: # new in 3.6
+  Enabled: true
+RSpec/LeakyLocalVariable: # new in 3.8
+  Enabled: true
+RSpec/Output: # new in 3.9
+  Enabled: true

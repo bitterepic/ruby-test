@@ -97,6 +97,12 @@ module GeneratedUrlHelpersModule
   def rails_storage_redirect_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def rswag_api_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def rswag_ui_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -113,10 +119,4 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def v1_subscriptions_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def v1_user_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def v1_users_url(*args); end
 end

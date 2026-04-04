@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   before_action :ensure_authenticated
 
   rescue_from UnauthorizedError, with: :handle_unauthorized_error
-  rescue_from ForbiddenError, with: :handle_forbidden_error
+  rescue_from ForbiddenError, with: :handle_not_found_error
   rescue_from NotFoundError, with: :handle_not_found_error
 
   extend T::Sig
@@ -21,12 +21,15 @@ class ApplicationController < ActionController::API
     @user = T.let(nil, T.nilable(User))
   end
 
+  # Helper for fetching a user who is guaranteed to always
+  # be authenticated.  Otherwise, it shows an UnauthorizedError.
   sig { returns(User) }
   def authenticated_user
     raise UnauthorizedError if @user.nil?
     @user
   end
 
+  # Authorization helper designed to be run in a before_action
   sig { returns(T.nilable(String)) }
   def ensure_authenticated
     unless load_user
@@ -36,11 +39,13 @@ class ApplicationController < ActionController::API
 
   private
 
+  # Generates a new json web token for login
   sig { params(payload: T.untyped).returns(String) }
   def encode_token(payload)
     JsonWebToken.encode({ data: payload, exp: Time.now.to_i + 4 * 3600 })
   end
 
+  # Decodes a new json web token for verifying authentication
   sig { returns(T.untyped) }
   def decode_token
     header = request.headers["Authorization"]
@@ -77,11 +82,6 @@ class ApplicationController < ActionController::API
   sig { params(exception: UnauthorizedError).returns(String) }
   def handle_unauthorized_error(exception)
     handle_error(exception, "Unauthorized", :unauthorized)
-  end
-
-  sig { params(exception: ForbiddenError).returns(String) }
-  def handle_forbidden_error(exception)
-    handle_error(exception, "Forbidden", :forbidden)
   end
 
   sig { params(exception: StandardError).returns(String) }

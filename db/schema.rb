@@ -31,7 +31,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_130715) do
     t.string "currency"
     t.datetime "expires_date", null: false
     t.string "external_id", null: false
-    t.datetime "purchase_date"
+    t.datetime "purchase_date", null: false
     t.integer "source", null: false
     t.integer "subscription_id"
     t.index ["created_at"], name: "index_transactions_on_created_at"

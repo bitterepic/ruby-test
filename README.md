@@ -55,6 +55,13 @@ FUTURE: There is an enum to describe where the transaction source.  It currently
 
 ## API
 
+
+RAILS_ENV=test rails rswag
+
+Generate API Documentation
+https://github.com/rswag/rswag?tab=readme-ov-file#getting-started
+
+
 APIs are scoped by version.  You can find details on how to call the API in
 the controllers. TODO: Add swagger docs in the future.
 

@@ -1,0 +1,62 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/register":
+    post:
+      summary: Creates a blog
+      tags:
+      - Register
+      parameters: []
+      responses:
+        '201':
+          description: blog created
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    id: 1
+                    title: Hello world!
+                    content: "..."
+                example_key_2:
+                  value:
+                    id: 1
+                    title: Hello world!
+                    content: "..."
+                  summary: Summary of the example
+                  description: Longer description of the example
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                given_name:
+                  type: string
+                family_name:
+                  type: string
+              required:
+              - email
+              - password
+              - given_name
+              - family_name
+            examples:
+              Register a user:
+                summary: A request example
+                value:
+                  email: test@example.com
+                  password: '0123456789'
+                  given_name: example given name
+                  family_name: example family name
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

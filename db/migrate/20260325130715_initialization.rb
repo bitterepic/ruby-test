@@ -17,7 +17,7 @@ class Initialization < ActiveRecord::Migration[8.1]
       t.integer :action, null: false, comment: "purchase or renew or cancel"
       t.decimal :amount
       t.string :currency
-      t.datetime :purchase_date, index: true
+      t.datetime :purchase_date, null: false, index: true
       t.datetime :expires_date, null: false, index: true
       t.datetime :created_at, null: false, index: true
 
