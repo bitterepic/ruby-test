@@ -3,7 +3,7 @@
 require "test_helper"
 require "test_helpers/testing"
 require "timecop"
-require_relative "../../app/controllers/concerns/json_web_token"
+require_relative "../../../app/controllers/concerns/json_web_token"
 
 class AuthenticationControllerTest < Testing::IntegrationTest
   extend T::Sig

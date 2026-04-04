@@ -6,13 +6,13 @@ class V1::AppleTransactionsController < ApplicationController
   # Nonfatal errors where the request should still return
   # a 200, even though internal it is a noop.
   class DuplicateNotificationError < StandardError; end
-  class InvalidExpirationError < StandardError; end
+  class CancelationMustMatchPreviousError < StandardError; end
   class PurchaseMustBeFirstTransaction < StandardError; end
   class AlreadyCancelledError < StandardError; end
   class SubscriptionNotFound < StandardError; end
 
   rescue_from DuplicateNotificationError, with: :handle_nonfatal_error
-  rescue_from InvalidExpirationError, with: :handle_nonfatal_error
+  rescue_from CancelationMustMatchPreviousError, with: :handle_nonfatal_error
   rescue_from PurchaseMustBeFirstTransaction, with: :handle_nonfatal_error
   rescue_from AlreadyCancelledError, with: :handle_nonfatal_error
   rescue_from SubscriptionNotFound, with: :handle_nonfatal_error
@@ -53,11 +53,17 @@ class V1::AppleTransactionsController < ApplicationController
     already_cancelled = (
       transaction_params2["action"] == "cancel" && previous_transaction&.action == "cancel"
     )
-    raise InvalidExpirationError.new(transaction_params2) if already_cancelled
-    invalid_expiration = (
-      previous_transaction && transaction_params2["purchase_date"] && previous_transaction.expires_date > DateTime.parse(transaction_params2["purchase_date"])
+    raise AlreadyCancelledError.new(transaction_params2) if already_cancelled
+
+    cancelled_matches_previous = (
+    previous_transaction && transaction_params["action"] == "cancel" && (previous_transaction.expires_date != DateTime.parse(transaction_params2["expires_date"]) || previous_transaction.purchase_date != DateTime.parse(transaction_params2["purchase_date"]))
     )
-    raise InvalidExpirationError.new(transaction_params2) if invalid_expiration
+    raise CancelationMustMatchPreviousError.new(transaction_params2) if cancelled_matches_previous 
+
+    purchase_before_expiration = (
+    previous_transaction && transaction_params["action"] != "cancel" && (previous_transaction.expires_date > DateTime.parse(transaction_params2["purchase_date"]))
+    )
+    raise CancelationMustMatchPreviousError.new(transaction_params2) if purchase_before_expiration
 
     new_transaction = Transaction.new(transaction_params2)
 

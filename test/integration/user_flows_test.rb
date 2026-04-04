@@ -15,7 +15,7 @@ class UserFlowsTest < Testing::IntegrationTest
     login
 
     @token = T.let(response.parsed_body["token"], String)
-    @user_id = T.let(response.parsed_body["id"], Integer)
+    @user_id = T.let(response.parsed_body["user"]["id"], Integer)
     @headers = { Authorization: "Bearer #{@token}" }
 
     assert_response :success
@@ -31,7 +31,7 @@ class UserFlowsTest < Testing::IntegrationTest
       subscription: { product_id: }
     }, headers: @headers, as: :json
     assert_response :created
-    response.parsed_body["id"]
+    response.parsed_body["subscription"]["id"]
   end
 
   sig { params(
@@ -105,6 +105,7 @@ class UserFlowsTest < Testing::IntegrationTest
           "type": "cancel",
           "transaction_id": subscription_id,
           "product_id": product_id,
+          purchase_date:,
           expires_date:
         }
       }, headers: @headers, as: :json
@@ -123,11 +124,13 @@ class UserFlowsTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => nil
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => nil
+      }
     }, response.parsed_body)
   end
 
@@ -140,19 +143,21 @@ class UserFlowsTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => {
-        "id" => purchase_transaction_id,
-        "action" => "purchase",
-        "created_at" => "1990-01-01T00:01:00.000Z",
-        "currency" => "USD",
-        "expires_date" => "2025-02-01T12:00:00.000Z",
-        "external_id" => "1",
-        "purchase_date" => "2025-01-01T12:00:00.000Z",
-        "source" => "apple"
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => {
+          "id" => purchase_transaction_id,
+          "action" => "purchase",
+          "created_at" => "1990-01-01T00:01:00.000Z",
+          "currency" => "USD",
+          "expires_date" => "2025-02-01T12:00:00.000Z",
+          "external_id" => "1",
+          "purchase_date" => "2025-01-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }, response.parsed_body)
   end
@@ -177,19 +182,21 @@ class UserFlowsTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => {
-        "id" => renew_transaction_id,
-        "action" => "renew",
-        "created_at" => "1990-01-01T00:02:00.000Z",
-        "currency" => "USD",
-        "expires_date" => "2025-03-01T12:00:00.000Z",
-        "external_id" => "2",
-        "purchase_date" => "2025-02-01T12:00:00.000Z",
-        "source" => "apple"
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => {
+          "id" => renew_transaction_id,
+          "action" => "renew",
+          "created_at" => "1990-01-01T00:02:00.000Z",
+          "currency" => "USD",
+          "expires_date" => "2025-03-01T12:00:00.000Z",
+          "external_id" => "2",
+          "purchase_date" => "2025-02-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }, response.parsed_body)
   end
@@ -214,19 +221,21 @@ class UserFlowsTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => {
-        "action" => "cancel",
-        "created_at" => "1990-01-01T00:02:00.000Z",
-        "expires_date" => "2025-02-01T12:00:00.000Z",
-        "currency" => nil,
-        "external_id" => "2",
-        "id" => cancel_transaction_id,
-        "purchase_date" => nil,
-        "source" => "apple"
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => {
+          "action" => "cancel",
+          "created_at" => "1990-01-01T00:02:00.000Z",
+          "expires_date" => "2025-02-01T12:00:00.000Z",
+          "currency" => nil,
+          "external_id" => "2",
+          "id" => cancel_transaction_id,
+          "purchase_date" => "2025-01-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }, response.parsed_body)
   end
@@ -257,19 +266,21 @@ class UserFlowsTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => {
-        "id" => renew_transaction_id,
-        "action" => "renew",
-        "created_at" => "1990-01-01T00:03:00.000Z",
-        "currency" => "USD",
-        "expires_date" => "2025-03-01T12:00:00.000Z",
-        "external_id" => "3",
-        "purchase_date" => "2025-02-01T12:00:00.000Z",
-        "source" => "apple"
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => {
+          "id" => renew_transaction_id,
+          "action" => "renew",
+          "created_at" => "1990-01-01T00:03:00.000Z",
+          "currency" => "USD",
+          "expires_date" => "2025-03-01T12:00:00.000Z",
+          "external_id" => "3",
+          "purchase_date" => "2025-02-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }, response.parsed_body)
   end
@@ -300,19 +311,21 @@ class UserFlowsTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => {
-        "action" => "cancel",
-        "created_at" => "1990-01-01T00:02:00.000Z",
-        "expires_date" => "2025-02-01T12:00:00.000Z",
-        "currency" => nil,
-        "external_id" => "2",
-        "id" => cancel_transaction_id,
-        "purchase_date" => nil,
-        "source" => "apple"
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => {
+          "action" => "cancel",
+          "created_at" => "1990-01-01T00:02:00.000Z",
+          "expires_date" => "2025-02-01T12:00:00.000Z",
+          "currency" => nil,
+          "external_id" => "2",
+          "id" => cancel_transaction_id,
+          "purchase_date" => "2025-01-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }, response.parsed_body)
   end
@@ -336,36 +349,40 @@ class UserFlowsTest < Testing::IntegrationTest
     get v1_subscription_path(subscription_id), headers: @headers, as: :json
     assert_response :success
     {
-      "id" => 904941505,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => 715507355,
-      "user_id" => 1072791106,
-      "last_transaction" => {
-        "id" => 555209021,
-        "action" => "purchase",
-        "created_at" => "1990-01-01T00:01:00.000Z",
-        "currency" => "USD",
-        "expires_date" => "2025-02-01T12:00:00.000Z",
-        "external_id" => "1",
-        "purchase_date" => "2025-01-01T12:00:00.000Z",
-        "source" => "apple"
+      "subscription" => {
+        "id" => 904941505,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => 715507355,
+        "user_id" => 1072791106,
+        "last_transaction" => {
+          "id" => 555209021,
+          "action" => "purchase",
+          "created_at" => "1990-01-01T00:01:00.000Z",
+          "currency" => "USD",
+          "expires_date" => "2025-02-01T12:00:00.000Z",
+          "external_id" => "1",
+          "purchase_date" => "2025-01-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }
 
     assert_equal({
-      "id" => subscription_id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => product_id,
-      "user_id" => @user_id,
-      "last_transaction" => {
-        "action" => "purchase",
-        "created_at" => "1990-01-01T00:01:00.000Z",
-        "expires_date" => "2025-02-01T12:00:00.000Z",
-        "currency" => "USD",
-        "external_id" => "1",
-        "id" => purchase_transaction_id,
-        "purchase_date" => "2025-01-01T12:00:00.000Z",
-        "source" => "apple"
+      "subscription" => {
+        "id" => subscription_id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => product_id,
+        "user_id" => @user_id,
+        "last_transaction" => {
+          "action" => "purchase",
+          "created_at" => "1990-01-01T00:01:00.000Z",
+          "expires_date" => "2025-02-01T12:00:00.000Z",
+          "currency" => "USD",
+          "external_id" => "1",
+          "id" => purchase_transaction_id,
+          "purchase_date" => "2025-01-01T12:00:00.000Z",
+          "source" => "apple"
+        }
       }
     }, response.parsed_body)
   end
