@@ -45,15 +45,13 @@ A product that can be subscribed to, such as a monthly subscription.
 
 ### Subscription
 
-A subscription that a user has created.  It can be in a purchased, cancelled, or renewed state based off of the last executed transaction.  Apple transactions are created through the apple webhook. When there are no transactions, the subscription is not yet active.
+A subscription that a user has created.  It can be in a purchased, cancelled, or renewed state based off of the last executed transaction.  Apple transactions are created through the apple webhook. When there are no transactions, the subscription is not yet active. The active transaction on a subscription will be attached to the transaction when fetching the detail on the "last_transaction" attribute.
 
 ### Transaction
 
 A record of actions by the user used for finding the current subscription state as well as for viewing a history of previous transactions.
 
 Transactions must be sequential into the future and never overlap.
-
-FUTURE: There is an enum to describe where the transaction source.  It currently only supports "apple", but "google" and "web" are future possible payment sources.
 
 ## API
 
