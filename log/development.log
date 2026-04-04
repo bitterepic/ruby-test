@@ -2955,3 +2955,33 @@ Processing by V1::SubscriptionsController#index as JSON
 Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/v1/products" for 127.0.0.1 at 2026-04-04 22:47:29 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+Processing by V1::ProductsController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/v1/products_controller.rb:9:in 'V1::ProductsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 200 OK in 17ms (Views: 1.0ms | ActiveRecord: 1.6ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/v1/subscriptions" for 127.0.0.1 at 2026-04-04 22:47:54 +0900
+Processing by V1::SubscriptionsController#create as JSON
+  Parameters: {"product_id" => 1, "subscription" => {"product_id" => 1}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:43:in 'V1::SubscriptionsController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:43:in 'V1::SubscriptionsController#create'
+  [1m[36mProduct Load (1.9ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = 1 LIMIT 1 /*action='create',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:43:in 'V1::SubscriptionsController#create'
+  [1m[36mSubscription Create (0.1ms)[0m  [1m[32mINSERT INTO "subscriptions" ("user_id", "product_id", "created_at") VALUES (1, 1, '2026-04-04 13:47:54.758214') RETURNING "id" /*action='create',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:43:in 'V1::SubscriptionsController#create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:43:in 'V1::SubscriptionsController#create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 201 Created in 19ms (Views: 0.4ms | ActiveRecord: 3.7ms (4 queries, 1 cached) | GC: 0.0ms)
+
+

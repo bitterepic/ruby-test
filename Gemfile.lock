@@ -439,7 +439,7 @@ DEPENDENCIES
   rswag-ui
   rubocop
   rubocop-rails-omakase
-  rubocop-rspec (~> 3.9)
+  rubocop-rspec
   solid_cable
   solid_cache
   solid_queue
