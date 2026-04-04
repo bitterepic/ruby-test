@@ -59,6 +59,8 @@ FUTURE: There is an enum to describe where the transaction source.  It currently
 
 Api Documentation is generated using [rswag](https://github.com/rswag/rswag?tab=readme-ov-file#getting-started). You can view the api documentation by starting the webserver `rails s` and navigating to `http://localhost:3000/api-docs`.
 
+![Swagger API documentation](docs/swagger.png)
+
 If you are developing the api docs, you can rebuild it with `RAILS_ENV=test rails rswag`.
 
 In order to used endpoints that require authentication, you must use the login endpoint, and then apply the api token in the format of `"Bearer #{token}"`.
