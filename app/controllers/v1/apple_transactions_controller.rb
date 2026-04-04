@@ -56,12 +56,12 @@ class V1::AppleTransactionsController < ApplicationController
     raise AlreadyCancelledError.new(transaction_params2) if already_cancelled
 
     cancelled_matches_previous = (
-    previous_transaction && transaction_params["action"] == "cancel" && (previous_transaction.expires_date != DateTime.parse(transaction_params2["expires_date"]) || previous_transaction.purchase_date != DateTime.parse(transaction_params2["purchase_date"]))
+    previous_transaction && transaction_params2["action"] == "cancel" && transaction_params2["action"] == "cancel" && (previous_transaction.expires_date != DateTime.parse(transaction_params2["expires_date"]) || previous_transaction.purchase_date != DateTime.parse(transaction_params2["purchase_date"]))
     )
     raise CancelationMustMatchPreviousError.new(transaction_params2) if cancelled_matches_previous 
 
     purchase_before_expiration = (
-    previous_transaction && transaction_params["action"] != "cancel" && (previous_transaction.expires_date > DateTime.parse(transaction_params2["purchase_date"]))
+    previous_transaction && transaction_params2["action"] != "cancel" && (previous_transaction.expires_date > DateTime.parse(transaction_params2["purchase_date"]))
     )
     raise CancelationMustMatchPreviousError.new(transaction_params2) if purchase_before_expiration
 
