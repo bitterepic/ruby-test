@@ -2,87 +2,73 @@ require 'swagger_helper'
 
 describe 'api/v1/subscriptions', type: :request do
   path '/v1/subscriptions' do
-    post 'Create a subscription' do
-      tags 'Subscription'
+    get 'Get all subscriptions for the user' do
+      tags 'Subscriptions'
       consumes 'application/json'
-      request_body_example value: {
-        user_id: 1,
-        product_id: 1
-      }
-      parameter name: 'body', in: :body, schema: {
-        type: :object,
-        properties: {
-            user_id: :integer,
-            product_id: :integer,
-        },
-        required: [ 'user_id', 'product_id' ]
-      }
+      security [Bearer: {}]
 
-      response '201', 'user registered' do
+      response '200', 'Returns all subscriptions for the user' do
+        let(:"Authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
-          "user": {
-            "created_at": "2026-04-04T02:18:40.116Z",
-            "email": "test@example.com",
-            "family_name": "example family name",
-            "given_name": "example given name",
-            "id": 1,
-            "roles": []
-          }
-        }
-        run_test!
-      end
-
-      response '422', 'user exists' do
-        example 'application/json', :success, {
-          "error": [
-            "Email has already been taken"
+          "subscriptions": [
           ]
         }
         run_test!
       end
-    end
-  end
 
-  path '/v1/login' do
-    post 'Logs in a user' do
-      tags 'Login'
+      response '401', 'Unauthorized' do
+        example 'application/json', :success, {
+          "message": "Please log in"
+        }
+        run_test!
+      end
+    end
+
+    post 'Create a subscription for the user' do
+      tags 'Subscription'
       consumes 'application/json'
+      security [Bearer: {}]
       request_body_example value: {
-          email: "test@example.com",
-          password: "0123456789",
-        },
-        name: 'Login a user',
-        summary: 'Returns the user\'s information and an authorization token. It should be passed as the bairer token to other authorized requests.'
+        product_id: 1
+      },
+      name: "Create a subscription",
+      summary: "A request example"
       parameter name: 'body', in: :body, schema: {
         type: :object,
         properties: {
-          email: { type: :string },
-          password: { type: :string },
-          given_name: { type: :string },
-          family_name: { type: :string }
+          product_id: { type: :number },
         },
-        required: [ 'email', 'password' ]
+        required: [ 'product_id' ]
       }
 
-      response '200', 'Login succeeded' do
+      response '201', 'Subscription created' do
+        let(:"Authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
-          "token": "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjoxfSwiZXhwIjoxNzc1Mjg2MjEwfQ.e1HbNox2aIGH8aqPIBAYPbwAiAX_Xck-ju9la95KwNg",
-          "user": {
-            "created_at": "2026-04-04T02:18:40.116Z",
-            "email": "test@example.com",
-            "family_name": "example family name",
-            "given_name": "example given name",
+          subscription: {
             "id": 1,
-            "roles": []
+            "user_id": 1,
+            "product_id": 1,
+            "created_at": "2026-04-04T12:53:09.007Z"
           }
         }
         run_test!
       end
 
-      response '401', 'Login failed' do
+      response '401', 'Unauthorized' do
         example 'application/json', :success, {
-          "message": "Unauthorized"
-        },
+          "message": "Please log in"
+        }
+        run_test!
+      end
+
+      response '422', 'Creation failed' do
+        example 'application/json', :success, {
+          "errors": {
+            "product": [
+              "must exist"
+            ]
+          }
+        }
         run_test!
       end
     end

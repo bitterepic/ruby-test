@@ -125,7 +125,7 @@ paths:
                   password: '0123456789'
   "/v1/products":
     get:
-      summary: Create a product
+      summary: Get available products
       tags:
       - Product
       security:
@@ -138,53 +138,94 @@ paths:
               examples:
                 success:
                   value:
-                    user: []
+                    products:
+                    - id: 1
+                      name: com.samansa.subscription.monthly
+                      created_at: '2026-04-04T12:39:23.954Z'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    message: Please log in
   "/v1/subscriptions":
+    get:
+      summary: Get all subscriptions for the user
+      tags:
+      - Subscriptions
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Returns all subscriptions for the user
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    subscriptions: []
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    message: Please log in
     post:
-      summary: Create a subscription
+      summary: Create a subscription for the user
       tags:
       - Subscription
+      security:
+      - Bearer: {}
       parameters: []
       responses:
         '201':
-          description: user registered
+          description: Subscription created
           content:
             application/json:
               examples:
                 success:
                   value:
-                    user:
-                      created_at: '2026-04-04T02:18:40.116Z'
-                      email: test@example.com
-                      family_name: example family name
-                      given_name: example given name
+                    subscription:
                       id: 1
-                      roles: []
-        '422':
-          description: user exists
+                      user_id: 1
+                      product_id: 1
+                      created_at: '2026-04-04T12:53:09.007Z'
+        '401':
+          description: Unauthorized
           content:
             application/json:
               examples:
                 success:
                   value:
-                    error:
-                    - Email has already been taken
+                    message: Please log in
+        '422':
+          description: Creation failed
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    errors:
+                      product:
+                      - must exist
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                user_id: integer
-                product_id: integer
+                product_id:
+                  type: number
               required:
-              - user_id
               - product_id
             examples:
-              '0':
-                summary: Create a subscription
+              Create a subscription:
+                summary: A request example
                 value:
-                  user_id: 1
                   product_id: 1
 servers:
 - url: http://{defaultHost}
