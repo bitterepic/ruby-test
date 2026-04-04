@@ -7,7 +7,7 @@ module Testing
       created_at: String,
       family_name: String,
       given_name: String,
-      id: Integer,
+      id: Integer
     },
     token: String
   } }
@@ -123,7 +123,7 @@ module Testing
       }
 
       {
-        user: { 
+        user: {
           created_at: user["created_at"],
           family_name: user["family_name"],
           given_name: user["given_name"],

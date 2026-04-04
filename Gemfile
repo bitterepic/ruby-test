@@ -35,15 +35,15 @@ gem "image_processing", "~> 1.2"
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 
-gem 'rswag-api'
-gem 'rswag-ui'
+gem "rswag-api"
+gem "rswag-ui"
 
 gem "sorbet", group: :development
 gem "sorbet-runtime"
 
 group :test do
-  gem 'rspec-rails'
-  gem 'rswag-specs'
+  gem "rspec-rails"
+  gem "rswag-specs"
 end
 
 group :development, :test do
@@ -74,4 +74,3 @@ gem "rack-cors", "~> 3.0"
 gem "active_model_serializers", "~> 0.10.16"
 
 gem "timecop", "~> 0.9.10"
-

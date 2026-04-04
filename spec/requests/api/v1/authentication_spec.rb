@@ -55,7 +55,7 @@ describe 'api/v1/authentication', type: :request do
       consumes 'application/json'
       request_body_example value: {
           email: "test@example.com",
-          password: "0123456789",
+          password: "0123456789"
         },
         name: 'Login a user',
         summary: 'Returns the user\'s information and an authorization token. It should be passed as the bairer token to other authorized requests.'

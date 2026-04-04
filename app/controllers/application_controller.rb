@@ -51,10 +51,10 @@ class ApplicationController < ActionController::API
   def decode_token
     header = request.headers["Authorization"]
     if header
-      if (!header.starts_with?("Bearer "))
+      if !header.starts_with?("Bearer ")
         throw UnauthorizedError.new("Auth token must start with 'Bearer '")
       end
-      token = header.gsub(/^Bearer /, '')
+      token = header.gsub(/^Bearer /, "")
       begin
         JsonWebToken.decode(token)
       rescue JWT::DecodeError

@@ -5,7 +5,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
     post 'Create a transaction for a subscription' do
       tags 'Webhooks'
       consumes 'application/json'
-      security [Bearer: {}]
+      security [ Bearer: {} ]
       request_body_example(value: {
         "transaction": {
           "notification_uuid": "4d249252-118d-42c6-99b8-75ded060ceea",
@@ -15,7 +15,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
           "transaction_id": 1,
           "product_id": 1,
           "purchase_date": "1990-01-01T00:01:00.000Z",
-          "expires_date": "1990-02-01T12:00:00.000Z",
+          "expires_date": "1990-02-01T12:00:00.000Z"
         }
       }, name: "Purchase a subscription", summary: "The required first transaction on a subscription to enable it. The apple transaction_id maps to a subscription_id.")
       request_body_example(value: {
@@ -25,7 +25,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
           "transaction_id": 1,
           "product_id": 1,
           "purchase_date": "1990-01-01T00:01:00.000Z",
-          "expires_date": "1990-02-01T12:00:00.000Z",
+          "expires_date": "1990-02-01T12:00:00.000Z"
         }
       }, name: "Cancel a subscription", summary: "A transaction signifying that a user has cancelled their subscription.  It must have the same purchase_date and expires_date as the previous transaction. The apple transaction_id maps to a subscription_id.")
       request_body_example(value: {
@@ -37,13 +37,13 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
           "transaction_id": 1,
           "product_id": 1,
           "purchase_date": "1990-01-01T00:01:00.000Z",
-          "expires_date": "1990-02-01T12:00:00.000Z",
+          "expires_date": "1990-02-01T12:00:00.000Z"
         }
       }, name: "Renew a subscription", summary: "A transaction signifying that a user has renewed their subscription.  The purchase date of the subscription must align to the previous expiration date. The apple transaction_id maps to a subscription_id.")
       parameter name: 'body', in: :body, schema: {
         type: :object,
         properties: {
-          product_id: { type: :number },
+          product_id: { type: :number }
         },
         required: [ 'product_id' ]
       }

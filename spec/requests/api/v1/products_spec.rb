@@ -5,7 +5,7 @@ describe 'api/v1/products', type: :request do
     get 'Get available products' do
       tags 'Products'
       consumes 'application/json'
-      security [Bearer: {}]
+      security [ Bearer: {} ]
 
       response '200', 'Returns all products' do
         let(:"Authorization") { "Bearer #{token_for(user)}" }

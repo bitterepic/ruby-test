@@ -7,7 +7,7 @@ describe 'api/v1/subscriptions', type: :request do
       parameter name: 'id', in: :path, type: :string
       tags 'Subscriptions'
       consumes 'application/json'
-      security [Bearer: {}]
+      security [ Bearer: {} ]
 
       response '200', "Returns the user's subscription detail" do
         let(:"Authorization") { "Bearer #{token_for(user)}" }
@@ -53,7 +53,7 @@ describe 'api/v1/subscriptions', type: :request do
       produces 'application/json', 'application/xml'
       tags 'Subscriptions'
       consumes 'application/json'
-      security [Bearer: {}]
+      security [ Bearer: {} ]
 
       response '200', 'Returns all subscriptions for the user' do
         let(:"Authorization") { "Bearer #{token_for(user)}" }
@@ -81,7 +81,7 @@ describe 'api/v1/subscriptions', type: :request do
     post 'Create a subscription for the user' do
       tags 'Subscriptions'
       consumes 'application/json'
-      security [Bearer: {}]
+      security [ Bearer: {} ]
       request_body_example value: {
         product_id: 1
       },
@@ -90,7 +90,7 @@ describe 'api/v1/subscriptions', type: :request do
       parameter name: 'body', in: :body, schema: {
         type: :object,
         properties: {
-          product_id: { type: :number },
+          product_id: { type: :number }
         },
         required: [ 'product_id' ]
       }

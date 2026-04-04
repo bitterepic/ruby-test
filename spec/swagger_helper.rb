@@ -29,7 +29,7 @@ RSpec.configure do |config|
             name: 'Authorization',
             in: :header
           }
-        },
+        }
       },
       paths: {},
       servers: [
