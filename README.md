@@ -26,6 +26,8 @@ the respective commands.
 
 5. When making changes to the db or your models update your sorbet types with `tapioca dsl`.  If you add a gem, run `tapioca gem`.  This will allow correct completion and type checking.
 
+6. [Configure your Rail credentials](https://guides.rubyonrails.org/security.html#custom-credentials) to include a secret key `hmac_secret` for JSON Web Tokens with `rails credentials:edit`.
+
 ## Database
 
 ![model diagram](docs/database.png)
@@ -60,6 +62,8 @@ RAILS_ENV=test rails rswag
 
 Generate API Documentation
 https://github.com/rswag/rswag?tab=readme-ov-file#getting-started
+
+http://localhost:3000/api-docs/index.html
 
 
 APIs are scoped by version.  You can find details on how to call the API in

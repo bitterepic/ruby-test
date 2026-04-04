@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 describe 'api/v1/authentication', type: :request do
-  path '/register' do
+  path '/v1/register' do
     post 'Creates a blog' do
       tags 'Register'
       consumes 'application/json'
@@ -24,25 +24,75 @@ describe 'api/v1/authentication', type: :request do
         required: [ 'email', 'password', 'given_name', 'family_name' ]
       }
 
-      response '201', 'blog created' do
-        example 'application/json', :example_key, {
-          id: 1,
-          title: 'Hello world!',
-          content: '...'
+      response '201', 'user registered' do
+        example 'application/json', :success, {
+          "user": {
+            "created_at": "2026-04-04T02:18:40.116Z",
+            "email": "test@example.com",
+            "family_name": "example family name",
+            "given_name": "example given name",
+            "id": 1,
+            "roles": []
+          }
         }
-        example 'application/json', :example_key_2, {
-          id: 1,
-          title: 'Hello world!',
-          content: '...'
-        }, "Summary of the example", "Longer description of the example"
-        let(:request_params) { { 'blog' => { title: 'foo', content: 'bar' } } }
         run_test!
       end
 
-      # response '422', 'invalid request' do
-      #  let(:request_params) { { 'blog' => { title: 'foo' } } }
-      #  run_test!
-      # end
+      response '422', 'user exists' do
+        example 'application/json', :success, {
+          "error": [
+            "Email has already been taken"
+          ]
+        }
+        run_test!
+      end
+    end
+  end
+
+  path '/v1/login' do
+    post 'Logs in a user' do
+      tags 'Login'
+      consumes 'application/json'
+      request_body_example value: {
+          email: "test@example.com",
+          password: "0123456789",
+        },
+        name: 'Login a user',
+        summary: 'Returns the user\'s information and an authorization token. It should be passed as the bairer token to other authorized requests.'
+      parameter name: 'body', in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string },
+          password: { type: :string },
+          given_name: { type: :string },
+          family_name: { type: :string }
+        },
+        required: [ 'email', 'password' ]
+      }
+
+      response '200', 'login succeeded' do
+        example 'application/json', :success, {
+          "token": "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjoxfSwiZXhwIjoxNzc1Mjg2MjEwfQ.e1HbNox2aIGH8aqPIBAYPbwAiAX_Xck-ju9la95KwNg",
+          "user": {
+            "created_at": "2026-04-04T02:18:40.116Z",
+            "email": "test@example.com",
+            "family_name": "example family name",
+            "given_name": "example given name",
+            "id": 1,
+            "roles": []
+          }
+        }
+        run_test!
+      end
+
+      response '422', 'login failed' do
+        example 'application/json', :success, {
+          "error": [
+            "Email has already been taken"
+          ]
+        }
+        run_test!
+      end
     end
   end
 end

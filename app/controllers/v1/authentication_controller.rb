@@ -11,7 +11,14 @@ class V1::AuthenticationController < ApplicationController
 
     if user&.authenticate(params[:password])
       token = encode_token({ id: user.id })
-      render json: { token: token, **user.as_json }, status: :ok
+      render json: { token: token, user: user.as_json(only: [
+        :created_at,
+        :email,
+        :family_name,
+        :given_name,
+        :id,
+        :roles
+      ]) }, status: :ok
     else
       raise ForbiddenError.new
     end

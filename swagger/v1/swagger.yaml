@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/register":
+  "/v1/register":
     post:
       summary: Creates a blog
       tags:
@@ -12,22 +12,28 @@ paths:
       parameters: []
       responses:
         '201':
-          description: blog created
+          description: user registered
           content:
             application/json:
               examples:
-                example_key:
+                success:
                   value:
-                    id: 1
-                    title: Hello world!
-                    content: "..."
-                example_key_2:
+                    user:
+                      created_at: '2026-04-04T02:18:40.116Z'
+                      email: test@example.com
+                      family_name: example family name
+                      given_name: example given name
+                      id: 1
+                      roles: []
+        '422':
+          description: user exists
+          content:
+            application/json:
+              examples:
+                success:
                   value:
-                    id: 1
-                    title: Hello world!
-                    content: "..."
-                  summary: Summary of the example
-                  description: Longer description of the example
+                    error:
+                    - Email has already been taken
       requestBody:
         content:
           application/json:
@@ -55,8 +61,63 @@ paths:
                   password: '0123456789'
                   given_name: example given name
                   family_name: example family name
+  "/v1/login":
+    post:
+      summary: Logs in a user
+      tags:
+      - Login
+      parameters: []
+      responses:
+        '200':
+          description: login succeeded
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    token: eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjoxfSwiZXhwIjoxNzc1Mjg2MjEwfQ.e1HbNox2aIGH8aqPIBAYPbwAiAX_Xck-ju9la95KwNg
+                    user:
+                      created_at: '2026-04-04T02:18:40.116Z'
+                      email: test@example.com
+                      family_name: example family name
+                      given_name: example given name
+                      id: 1
+                      roles: []
+        '422':
+          description: login failed
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    error:
+                    - Email has already been taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                given_name:
+                  type: string
+                family_name:
+                  type: string
+              required:
+              - email
+              - password
+            examples:
+              Login a user:
+                summary: Returns the user's information and an authorization token.
+                  It should be passed as the bairer token to other authorized requests.
+                value:
+                  email: test@example.com
+                  password: '0123456789'
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000
