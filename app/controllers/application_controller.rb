@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
   before_action :ensure_authenticated
 
   rescue_from UnauthorizedError, with: :handle_unauthorized_error
+  # NOTE: As a security mechanism, forbidden errors are shown as not found responses.
   rescue_from ForbiddenError, with: :handle_not_found_error
   rescue_from NotFoundError, with: :handle_not_found_error
 

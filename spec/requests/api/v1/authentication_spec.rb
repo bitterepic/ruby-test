@@ -70,7 +70,7 @@ describe 'api/v1/authentication', type: :request do
         required: [ 'email', 'password' ]
       }
 
-      response '200', 'login succeeded' do
+      response '200', 'Login succeeded' do
         example 'application/json', :success, {
           "token": "eyJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImlkIjoxfSwiZXhwIjoxNzc1Mjg2MjEwfQ.e1HbNox2aIGH8aqPIBAYPbwAiAX_Xck-ju9la95KwNg",
           "user": {
@@ -85,12 +85,10 @@ describe 'api/v1/authentication', type: :request do
         run_test!
       end
 
-      response '422', 'login failed' do
+      response '401', 'Login failed' do
         example 'application/json', :success, {
-          "error": [
-            "Email has already been taken"
-          ]
-        }
+          "message": "Unauthorized"
+        },
         run_test!
       end
     end

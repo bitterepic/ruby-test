@@ -20,7 +20,7 @@ class V1::AuthenticationController < ApplicationController
         :roles
       ]) }, status: :ok
     else
-      raise ForbiddenError.new
+      raise UnauthorizedError.new
     end
   end
 

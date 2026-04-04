@@ -1956,3 +1956,32 @@ ERROR: V1::AuthenticationController ForbiddenError: ForbiddenError ${backtraceSt
 Completed 404 Not Found in 343ms (Views: 0.5ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 5.9ms)
 
 
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 12:10:37 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 12:10:37 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 12:10:37 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 12:10:37 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 12:10:38 +0900
+Started POST "/v1/login" for 127.0.0.1 at 2026-04-04 12:10:43 +0900
+Processing by V1::AuthenticationController#login as JSON
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[31mUnpermitted parameter: :authentication. Context: { controller: V1::AuthenticationController, action: login, request: #<ActionDispatch::Request:0x0000000123127f90>, params: {"email" => "[FILTERED]", "password" => "[FILTERED]", "controller" => "v1/authentication", "action" => "login", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}} }[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='login',application='RubyTest',controller='authentication'*/[0m
+  ↳ app/controllers/v1/authentication_controller.rb:10:in 'V1::AuthenticationController#login'
+rescue_from handled UnauthorizedError (UnauthorizedError) - app/controllers/v1/authentication_controller.rb:23:in 'V1::AuthenticationController#login'
+ERROR: V1::AuthenticationController UnauthorizedError: UnauthorizedError ${backtraceString}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.04ms)
+Completed 401 Unauthorized in 359ms (Views: 4.1ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 14.9ms)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 12:11:29 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 12:11:30 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 12:11:30 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 12:11:30 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 12:11:30 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 12:11:44 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 12:11:44 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 12:11:44 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 12:11:44 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 12:11:44 +0900

@@ -69,7 +69,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: login succeeded
+          description: Login succeeded
           content:
             application/json:
               examples:
@@ -83,15 +83,15 @@ paths:
                       given_name: example given name
                       id: 1
                       roles: []
-        '422':
-          description: login failed
+        '401':
+          description: Login failed
           content:
             application/json:
               examples:
                 success:
                   value:
-                    error:
-                    - Email has already been taken
+                    message: Unauthorized
+                  summary: '#<RSpec::Core::Example "returns a 401 response">'
       requestBody:
         content:
           application/json:
