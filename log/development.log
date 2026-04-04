@@ -2714,3 +2714,202 @@ Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 21:58:50 +090
 Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 21:58:50 +0900
 Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 21:58:50 +0900
 Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 21:58:51 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:16:38 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='RubyTest'*/[0m
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:16:38 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:16:38 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:16:38 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:16:38 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:18:08 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:18:08 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:18:08 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:18:08 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:18:08 +0900
+Started POST "/v1/webhooks/apple/transaction" for 127.0.0.1 at 2026-04-04 22:18:52 +0900
+  
+ActionController::RoutingError (No route matches [POST] "/v1/webhooks/apple/transaction"):
+  
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:20:06 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:20:06 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:20:06 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:20:06 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:20:06 +0900
+Started POST "/v1/webhooks/apple/transactions" for 127.0.0.1 at 2026-04-04 22:20:13 +0900
+Processing by V1::AppleTransactionsController#create as JSON
+  Parameters: {"transaction" => {"notification_uuid" => "4d249252-118d-42c6-99b8-75ded060ceea", "type" => "purchase", "amount" => "3.9", "currency" => "USD", "transaction_id" => 1, "product_id" => 1, "purchase_date" => "1990-01-01T00:01:00.000Z", "expires_date" => "1990-02-01T12:00:00.000Z"}, "apple_transaction" => {"transaction" => {"notification_uuid" => "4d249252-118d-42c6-99b8-75ded060ceea", "type" => "purchase", "amount" => "3.9", "currency" => "USD", "transaction_id" => 1, "product_id" => 1, "purchase_date" => "1990-01-01T00:01:00.000Z", "expires_date" => "1990-02-01T12:00:00.000Z"}}}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.02ms)
+Filter chain halted as :ensure_authenticated rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2026-04-04 22:20:33 +0900
+Processing by V1::AuthenticationController#login as JSON
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[31mUnpermitted parameter: :authentication. Context: { controller: V1::AuthenticationController, action: login, request: #<ActionDispatch::Request:0x00000001269a8ae0>, params: {"email" => "[FILTERED]", "password" => "[FILTERED]", "controller" => "v1/authentication", "action" => "login", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}} }[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='login',application='RubyTest',controller='authentication'*/[0m
+  ↳ app/controllers/v1/authentication_controller.rb:10:in 'V1::AuthenticationController#login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.03ms)
+Completed 200 OK in 359ms (Views: 0.5ms | ActiveRecord: 3.9ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/v1/webhooks/apple/transactions" for 127.0.0.1 at 2026-04-04 22:21:00 +0900
+Processing by V1::AppleTransactionsController#create as JSON
+  Parameters: {"transaction" => {"notification_uuid" => "4d249252-118d-42c6-99b8-75ded060ceea", "type" => "purchase", "amount" => "3.9", "currency" => "USD", "transaction_id" => 1, "product_id" => 1, "purchase_date" => "1990-01-01T00:01:00.000Z", "expires_date" => "1990-02-01T12:00:00.000Z"}, "apple_transaction" => {"transaction" => {"notification_uuid" => "4d249252-118d-42c6-99b8-75ded060ceea", "type" => "purchase", "amount" => "3.9", "currency" => "USD", "transaction_id" => 1, "product_id" => 1, "purchase_date" => "1990-01-01T00:01:00.000Z", "expires_date" => "1990-02-01T12:00:00.000Z"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+START: V1::AppleTransactionsController
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."id" = 1 LIMIT 1 /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:26:in 'V1::AppleTransactionsController#create'
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions"."id", "transactions"."action", "transactions"."created_at", "transactions"."currency", "transactions"."expires_date", "transactions"."external_id", "transactions"."purchase_date", "transactions"."source" FROM "transactions" WHERE "transactions"."subscription_id" = 1 ORDER BY "transactions"."created_at" DESC LIMIT 1 /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:38:in 'V1::AppleTransactionsController#create'
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."external_id" = '4d249252-118d-42c6-99b8-75ded060ceea' LIMIT 1 /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:50:in 'V1::AppleTransactionsController#create'
+  [1m[36mCACHE Subscription Load (0.0ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."id" = 1 LIMIT 1[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:70:in 'V1::AppleTransactionsController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:70:in 'V1::AppleTransactionsController#create'
+  [1m[36mTransaction Create (0.9ms)[0m  [1m[32mINSERT INTO "transactions" ("external_id", "source", "action", "amount", "currency", "purchase_date", "expires_date", "created_at", "subscription_id") VALUES ('4d249252-118d-42c6-99b8-75ded060ceea', 0, 0, 3.9, 'USD', '1990-01-01 00:01:00', '1990-02-01 12:00:00', '2026-04-04 13:21:00.691419', 1) RETURNING "id" /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:70:in 'V1::AppleTransactionsController#create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='RubyTest',controller='apple_transactions'*/[0m
+  ↳ app/controllers/v1/apple_transactions_controller.rb:70:in 'V1::AppleTransactionsController#create'
+SUCCESS: V1::AppleTransactionsController
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 201 Created in 40ms (Views: 0.3ms | ActiveRecord: 2.4ms (6 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/v1/subscriptions" for 127.0.0.1 at 2026-04-04 22:21:56 +0900
+Processing by V1::SubscriptionsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:16:in 'V1::SubscriptionsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.24ms)
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:27:52 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:27:52 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:27:52 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:27:52 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:27:52 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:27:56 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:27:56 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:27:56 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:27:56 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:27:56 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:28:53 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:28:53 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:28:53 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:28:53 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:28:54 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:29:17 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:29:17 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:29:17 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:29:17 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:29:18 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:29:27 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:29:27 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:29:27 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:29:27 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:29:28 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:29:53 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:29:53 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:29:53 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:29:53 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:29:53 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:30:09 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:30:09 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:30:09 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:30:09 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:30:09 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:30:15 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:30:15 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:30:15 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:30:15 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:30:15 +0900
+Started POST "/v1/login" for 127.0.0.1 at 2026-04-04 22:31:16 +0900
+Processing by V1::AuthenticationController#login as JSON
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[31mUnpermitted parameter: :authentication. Context: { controller: V1::AuthenticationController, action: login, request: #<ActionDispatch::Request:0x00000001273c6b80>, params: {"email" => "[FILTERED]", "password" => "[FILTERED]", "controller" => "v1/authentication", "action" => "login", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}} }[0m
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='login',application='RubyTest',controller='authentication'*/[0m
+  ↳ app/controllers/v1/authentication_controller.rb:10:in 'V1::AuthenticationController#login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.04ms)
+Completed 200 OK in 341ms (Views: 0.7ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/subscriptions/1" for 127.0.0.1 at 2026-04-04 22:31:47 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/subscriptions/1"):
+  
+Started GET "/v1/subscriptions" for 127.0.0.1 at 2026-04-04 22:32:21 +0900
+Processing by V1::SubscriptionsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.2ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:16:in 'V1::SubscriptionsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:32:50 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:32:50 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:32:50 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:32:50 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:32:50 +0900
+Started GET "/v1/subscriptions/1" for 127.0.0.1 at 2026-04-04 22:33:01 +0900
+Processing by V1::SubscriptionsController#show as JSON
+  Parameters: {"id" => "1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."id" = 1 ORDER BY "subscriptions"."id" ASC LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:53:in 'V1::SubscriptionsController#set_subscription'
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions"."id", "transactions"."action", "transactions"."created_at", "transactions"."currency", "transactions"."expires_date", "transactions"."external_id", "transactions"."purchase_date", "transactions"."source" FROM "transactions" WHERE "transactions"."subscription_id" = 1 ORDER BY "transactions"."created_at" DESC LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:33:in 'V1::SubscriptionsController#show'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.04ms)
+Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 0.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/subscriptions/12" for 127.0.0.1 at 2026-04-04 22:34:01 +0900
+Processing by V1::SubscriptionsController#show as JSON
+  Parameters: {"id" => "12"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."id" = 12 ORDER BY "subscriptions"."id" ASC LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:53:in 'V1::SubscriptionsController#set_subscription'
+rescue_from handled NotFoundError (NotFoundError) - app/controllers/v1/subscriptions_controller.rb:62:in 'V1::SubscriptionsController#subscription'
+ERROR: V1::SubscriptionsController NotFoundError: NotFoundError ${backtraceString}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 404 Not Found in 7ms (Views: 0.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/subscriptions/1" for 127.0.0.1 at 2026-04-04 22:34:12 +0900
+Processing by V1::SubscriptionsController#show as JSON
+  Parameters: {"id" => "1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."id" = 1 ORDER BY "subscriptions"."id" ASC LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:53:in 'V1::SubscriptionsController#set_subscription'
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions"."id", "transactions"."action", "transactions"."created_at", "transactions"."currency", "transactions"."expires_date", "transactions"."external_id", "transactions"."purchase_date", "transactions"."source" FROM "transactions" WHERE "transactions"."subscription_id" = 1 ORDER BY "transactions"."created_at" DESC LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:33:in 'V1::SubscriptionsController#show'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.03ms)
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/subscriptions/12" for 127.0.0.1 at 2026-04-04 22:34:23 +0900
+Processing by V1::SubscriptionsController#show as JSON
+  Parameters: {"id" => "12"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.2ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."id" = 12 ORDER BY "subscriptions"."id" ASC LIMIT 1 /*action='show',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:53:in 'V1::SubscriptionsController#set_subscription'
+rescue_from handled NotFoundError (NotFoundError) - app/controllers/v1/subscriptions_controller.rb:62:in 'V1::SubscriptionsController#subscription'
+ERROR: V1::SubscriptionsController NotFoundError: NotFoundError ${backtraceString}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 404 Not Found in 7ms (Views: 0.7ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:34:36 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:34:36 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:34:36 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:34:36 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:34:36 +0900

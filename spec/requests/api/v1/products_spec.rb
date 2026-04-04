@@ -3,7 +3,7 @@ require 'swagger_helper'
 describe 'api/v1/products', type: :request do
   path '/v1/products' do
     get 'Get available products' do
-      tags 'Product'
+      tags 'Products'
       consumes 'application/json'
       security [Bearer: {}]
 

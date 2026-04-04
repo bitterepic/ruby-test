@@ -3,7 +3,7 @@ require 'swagger_helper'
 describe 'api/v1/authentication', type: :request do
   path '/v1/register' do
     post 'Creates a blog' do
-      tags 'Register'
+      tags 'Authorization'
       consumes 'application/json'
       request_body_example value: {
           email: "test@example.com",
@@ -51,7 +51,7 @@ describe 'api/v1/authentication', type: :request do
 
   path '/v1/login' do
     post 'Logs in a user' do
-      tags 'Login'
+      tags 'Authorization'
       consumes 'application/json'
       request_body_example value: {
           email: "test@example.com",

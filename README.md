@@ -57,49 +57,12 @@ FUTURE: There is an enum to describe where the transaction source.  It currently
 
 ## API
 
+Api Documentation is generated using [rswag](https://github.com/rswag/rswag?tab=readme-ov-file#getting-started). You can view the api documentation by starting the webserver `rails s` and navigating to `http://localhost:3000/api-docs`.
 
-RAILS_ENV=test rails rswag
-
-Generate API Documentation
-https://github.com/rswag/rswag?tab=readme-ov-file#getting-started
-
-http://localhost:3000/api-docs/index.html
-
+If you are developing the api docs, you can rebuild it with `RAILS_ENV=test rails rswag`.
 
 APIs are scoped by version.  You can find details on how to call the API in
-the controllers. TODO: Add swagger docs in the future.
-
-### Subscriptions
-
-#### POST /v1/subscriptions
-
-Create a new subscription
-
-#### GET /v1/subscriptions
-
-List created subscriptions.
-
-#### GET /v1/subscriptions/:id
-
-Get the detail of one subscription.
-
-### Authentication
-
-#### POST /v1/register
-
-Register a new user
-
-#### POST /v1/login
-
-Authenticate with a registered user.
-
-### Webhooks
-
-#### POST /v1/webhooks/apple/transactions
-
-Create a new transaction on a subscription. A subscription will not be active until a purchase transaction has been created.
-
-Internally, this api maps transaction_id to subscription_id and `notification_uuid` to `extenal_id` in the database.
+the controllers.
 
 ### Testing
 
