@@ -3,6 +3,13 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+components:
+  securitySchemes:
+    Bearer:
+      description: Response token from the login
+      type: apiKey
+      name: Authorization
+      in: header
 paths:
   "/v1/register":
     post:
@@ -116,6 +123,69 @@ paths:
                 value:
                   email: test@example.com
                   password: '0123456789'
+  "/v1/products":
+    get:
+      summary: Create a product
+      tags:
+      - Product
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: Returns all products
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    user: []
+  "/v1/subscriptions":
+    post:
+      summary: Create a subscription
+      tags:
+      - Subscription
+      parameters: []
+      responses:
+        '201':
+          description: user registered
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    user:
+                      created_at: '2026-04-04T02:18:40.116Z'
+                      email: test@example.com
+                      family_name: example family name
+                      given_name: example given name
+                      id: 1
+                      roles: []
+        '422':
+          description: user exists
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    error:
+                    - Email has already been taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id: integer
+                product_id: integer
+              required:
+              - user_id
+              - product_id
+            examples:
+              '0':
+                summary: Create a subscription
+                value:
+                  user_id: 1
+                  product_id: 1
 servers:
 - url: http://{defaultHost}
   variables:

@@ -112,6 +112,9 @@ module GeneratedUrlHelpersModule
   def v1_login_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def v1_products_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def v1_register_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

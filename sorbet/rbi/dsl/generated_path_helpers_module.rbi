@@ -112,6 +112,9 @@ module GeneratedPathHelpersModule
   def v1_login_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def v1_products_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def v1_register_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

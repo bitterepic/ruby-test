@@ -24,12 +24,12 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
 
     get v1_subscriptions_path, headers: { Authorization: "Bearer #{@token}" }, as: :json
     assert_response :success
-    assert_equal [ {
+    assert_equal({ "subscriptions" => [ {
       "id" => subscription.id,
       "created_at" =>  "1990-01-01T00:00:00.000Z",
       "product_id" => products(:monthly).id,
       "user_id" =>  @user_id
-    } ], response.parsed_body
+    } ] }, response.parsed_body)
   end
 
   test "should not return index when not authorized" do
@@ -49,7 +49,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
 
     assert_response :unauthorized
 
-    expected_subscriptions = [ *subscriptions ]
+    expected_subscriptions = subscriptions
     actual_subscriptions = Subscription.all
 
     assert_equal expected_subscriptions.to_json, actual_subscriptions.to_json
@@ -66,7 +66,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
     assert_response :created
 
     expected_subscriptions = [ *subscriptions, {
-      id: response.parsed_body[:id],
+      id: response.parsed_body[:subscription][:id],
       created_at: "1990-01-01T00:00:00.000Z",
       product_id: product.id,
       user_id: @user_id
@@ -79,7 +79,7 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
   test "can't show subscription by other user" do
     subscription = subscriptions(:basic_subscription)
     get v1_subscription_url(subscription.id), headers: { Authorization: "Bearer #{@token}" }, as: :json
-    assert_response :forbidden
+    assert_response :not_found
   end
 
   test "should show own subscription" do
@@ -90,11 +90,13 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
     assert_response :success
 
     assert_equal({
-      "id" => subscription.id,
-      "created_at" => "1990-01-01T00:00:00.000Z",
-      "product_id" => products(:monthly).id,
-      "user_id" => @user_id,
-      "last_transaction" => nil
+      "subscription" => {
+        "id" => subscription.id,
+        "created_at" => "1990-01-01T00:00:00.000Z",
+        "product_id" => products(:monthly).id,
+        "user_id" => @user_id,
+        "last_transaction" => nil
+      }
     }, response.parsed_body)
   end
 

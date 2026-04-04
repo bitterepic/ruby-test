@@ -3,10 +3,12 @@
 #
 module Testing
   LoginResponseType = T.type_alias { {
-    created_at: String,
-    family_name: String,
-    given_name: String,
-    id: Integer,
+    user: {
+      created_at: String,
+      family_name: String,
+      given_name: String,
+      id: Integer,
+    },
     token: String
   } }
 
@@ -112,22 +114,21 @@ module Testing
       }, as: :json
 
       @token = response.parsed_body["token"]
-      @user_id = response.parsed_body["id"]
+      @user_id = response.parsed_body["user"]["id"]
 
       assert_response :success
       response.parsed_body => {
-        created_at:,
-        family_name:,
-        given_name:,
-        id:,
+        user:,
         token:
       }
 
       {
-        created_at:,
-        family_name:,
-        given_name:,
-        id:,
+        user: { 
+          created_at: user["created_at"],
+          family_name: user["family_name"],
+          given_name: user["given_name"],
+          id: user["id"]
+        },
         token:
       }
     end

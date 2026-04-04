@@ -21,6 +21,16 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
+      components: {
+        securitySchemes: {
+          Bearer: {
+            description: "Response token from the login",
+            type: :apiKey,
+            name: 'Authorization',
+            in: :header
+          }
+        },
+      },
       paths: {},
       servers: [
         {

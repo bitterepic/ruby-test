@@ -15,7 +15,7 @@ class V1::SubscriptionsController < ApplicationController
   def index
     subscriptions = T.let(Subscription.where(user_id: authenticated_user.id).to_a, T::Array[Subscription])
 
-    render json: subscriptions
+    render json: { subscriptions: }
   end
 
   # GET /subscriptions/1
@@ -32,7 +32,7 @@ class V1::SubscriptionsController < ApplicationController
       :source
     ).last.as_json
 
-    render json: { **subscription.as_json, last_transaction:  }
+    render json: { subscription: { **subscription.as_json, last_transaction: }  }
   end
 
   # POST /subscriptions
@@ -41,9 +41,9 @@ class V1::SubscriptionsController < ApplicationController
     new_subscription = Subscription.new({ **subscription_params, user_id: authenticated_user.id })
 
     if new_subscription.save
-      render json: new_subscription, status: :created, location: v1_subscription_path(new_subscription.id)
+      render json: { subscription: new_subscription }, status: :created, location: v1_subscription_path(new_subscription.id)
     else
-      render json: new_subscription.errors, status: :unprocessable_content
+      render json: { errors: new_subscription.errors }, status: :unprocessable_content
     end
   end
 

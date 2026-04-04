@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :v1 do
     resources :subscriptions, only: [ :index, :show, :create ]
+    resources :products, only: [ :index ]
     resources :apple_transactions, path: "/webhooks/apple/transactions", only: [ :create ]
   end
 
