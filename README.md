@@ -61,6 +61,8 @@ Api Documentation is generated using [rswag](https://github.com/rswag/rswag?tab=
 
 If you are developing the api docs, you can rebuild it with `RAILS_ENV=test rails rswag`.
 
+In order to used endpoints that require authentication, you must use the login endpoint, and then apply the api token in the format of `"Bearer #{token}"`.
+
 APIs are scoped by version.  You can find details on how to call the API in
 the controllers.
 
