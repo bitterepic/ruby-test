@@ -2918,3 +2918,40 @@ Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:38:0
 Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:38:03 +0900
 Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:38:03 +0900
 Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:38:03 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-04 22:44:08 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-04 22:44:09 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-04 22:44:09 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-04 22:44:09 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-04 22:44:09 +0900
+Started POST "/v1/login" for 127.0.0.1 at 2026-04-04 22:44:16 +0900
+Processing by V1::AuthenticationController#login as JSON
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[31mUnpermitted parameter: :authentication. Context: { controller: V1::AuthenticationController, action: login, request: #<ActionDispatch::Request:0x0000000127c64300>, params: {"email" => "[FILTERED]", "password" => "[FILTERED]", "controller" => "v1/authentication", "action" => "login", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}} }[0m
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='login',application='RubyTest',controller='authentication'*/[0m
+  ↳ app/controllers/v1/authentication_controller.rb:10:in 'V1::AuthenticationController#login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 200 OK in 340ms (Views: 0.9ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/subscriptions" for 127.0.0.1 at 2026-04-04 22:44:32 +0900
+Processing by V1::SubscriptionsController#index as JSON
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+UncaughtThrowError (uncaught throw #<UnauthorizedError: Auth token must start with 'Bearer '>):
+  
+app/controllers/application_controller.rb:55:in 'Kernel#throw'
+app/controllers/application_controller.rb:55:in 'ApplicationController#decode_token'
+app/controllers/application_controller.rb:68:in 'ApplicationController#load_user'
+app/controllers/application_controller.rb:36:in 'ApplicationController#ensure_authenticated'
+Started GET "/v1/subscriptions" for 127.0.0.1 at 2026-04-04 22:44:54 +0900
+Processing by V1::SubscriptionsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.2ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:16:in 'V1::SubscriptionsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

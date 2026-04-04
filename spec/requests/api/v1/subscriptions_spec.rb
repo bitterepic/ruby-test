@@ -10,7 +10,7 @@ describe 'api/v1/subscriptions', type: :request do
       security [ Bearer: {} ]
 
       response '200', "Returns the user's subscription detail" do
-        let(:"Authorization") { "Bearer #{token_for(user)}" }
+        let(:"authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
           "subscription": {
             "id": 1,
@@ -56,7 +56,7 @@ describe 'api/v1/subscriptions', type: :request do
       security [ Bearer: {} ]
 
       response '200', 'Returns all subscriptions for the user' do
-        let(:"Authorization") { "Bearer #{token_for(user)}" }
+        let(:"authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
           "subscriptions": [
             {
@@ -96,7 +96,7 @@ describe 'api/v1/subscriptions', type: :request do
       }
 
       response '201', 'Subscription created' do
-        let(:"Authorization") { "Bearer #{token_for(user)}" }
+        let(:"authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
           subscription: {
             "id": 1,

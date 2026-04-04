@@ -49,7 +49,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
       }
 
       response '201', 'Transaction created' do
-        let(:"Authorization") { "Bearer #{token_for(user)}" }
+        let(:"authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
           "transaction": {
             "id": 1,
