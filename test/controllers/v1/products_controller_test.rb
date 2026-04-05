@@ -27,11 +27,15 @@ class ProductsControllerTest < Testing::IntegrationTest
     assert_response :success
     assert_equal({
       "products" => [ previous_products[0].as_json, {
-        "id" => new_product.id,
-        "created_at" => "1990-01-01T00:00:00.000Z",
-        "name" => "test product"
-      }
-    ] }, response.parsed_body)
+          "id" => new_product.id,
+          "created_at" => "1990-01-01T00:00:00.000Z",
+          "name" => "test product"
+        }
+      ] ,
+      "count" => 2, 
+      "offset" => 0, 
+      "limit" => 20 
+    }, response.parsed_body)
   end
 
   test "should not return index when not authorized" do

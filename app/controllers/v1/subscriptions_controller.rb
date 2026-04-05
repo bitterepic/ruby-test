@@ -13,9 +13,13 @@ class V1::SubscriptionsController < ApplicationController
   # GET /subscriptions
   sig { returns(String) }
   def index
-    subscriptions = T.let(Subscription.where(user_id: authenticated_user.id).to_a, T::Array[Subscription]).limit(limit).offset(offset)
+    offset = params[:offset].nil? ? 0 : params[:offset].to_i || 0
+    limit = params[:limit].nil? ? 20 : params[:limit].to_i
+    result = Subscription.where(user_id: authenticated_user.id).limit(limit).offset(offset)
+    subscriptions = T.let(result.to_a, T::Array[Subscription])
+    count = result.count
 
-    render json: { subscriptions: }
+    render json: { subscriptions:, count:, offset:, limit: }
   end
 
   # GET /subscriptions/1
