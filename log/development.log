@@ -3133,3 +3133,58 @@ Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-05 22:42:33 +090
 Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-05 22:42:33 +0900
 Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-05 22:42:33 +0900
 Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-05 22:42:33 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-05 23:05:12 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-05 23:05:12 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-05 23:05:12 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-05 23:05:12 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-05 23:05:12 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-05 23:06:41 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-05 23:06:41 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-05 23:06:41 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-05 23:06:41 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-05 23:06:41 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-05 23:07:52 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-05 23:07:52 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-05 23:07:52 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-05 23:07:52 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-05 23:07:53 +0900
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2026-04-05 23:08:15 +0900
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2026-04-05 23:08:15 +0900
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2026-04-05 23:08:15 +0900
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2026-04-05 23:08:15 +0900
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2026-04-05 23:08:16 +0900
+Started POST "/v1/login" for 127.0.0.1 at 2026-04-05 23:08:23 +0900
+Processing by V1::AuthenticationController#login as JSON
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[31mUnpermitted parameter: :authentication. Context: { controller: V1::AuthenticationController, action: login, request: #<ActionDispatch::Request:0x0000000122640d20>, params: {"email" => "[FILTERED]", "password" => "[FILTERED]", "controller" => "v1/authentication", "action" => "login", "authentication" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}} }[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'test@example.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='login',application='RubyTest',controller='authentication'*/[0m
+  ↳ app/controllers/v1/authentication_controller.rb:10:in 'V1::AuthenticationController#login'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.02ms)
+Completed 200 OK in 249ms (Views: 0.9ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/products" for 127.0.0.1 at 2026-04-05 23:08:41 +0900
+Processing by V1::ProductsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" LIMIT 20 OFFSET 0 /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/v1/products_controller.rb:12:in 'V1::ProductsController#index'
+  [1m[36mProduct Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "products" LIMIT 20 OFFSET 0) AS subquery_for_count /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/v1/products_controller.rb:13:in 'V1::ProductsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.24ms)
+Completed 200 OK in 15ms (Views: 0.8ms | ActiveRecord: 1.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/products?offset=1" for 127.0.0.1 at 2026-04-05 23:08:48 +0900
+Processing by V1::ProductsController#index as JSON
+  Parameters: {"offset" => "1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" LIMIT 20 OFFSET 1 /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/v1/products_controller.rb:12:in 'V1::ProductsController#index'
+  [1m[36mProduct Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "products" LIMIT 20 OFFSET 1) AS subquery_for_count /*action='index',application='RubyTest',controller='products'*/[0m
+  ↳ app/controllers/v1/products_controller.rb:13:in 'V1::ProductsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.04ms)
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+

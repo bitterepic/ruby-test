@@ -6,6 +6,8 @@ describe 'api/v1/products', type: :request do
       tags 'Products'
       consumes 'application/json'
       security [ Bearer: {} ]
+      parameter name: 'limit', in: :query, type: :number
+      parameter name: 'offset', in: :query, type: :number
       description %Q(
 A type representing products that can be subscribed to.
       )
@@ -18,7 +20,10 @@ A type representing products that can be subscribed to.
               "name": "com.samansa.subscription.monthly",
               "created_at": "2026-04-04T12:39:23.954Z"
             }
-          ]
+          ],
+          "count": 1,
+          "limit": 20,
+          "offset": 0,
         }
         run_test!
       end

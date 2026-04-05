@@ -58,6 +58,8 @@ A subscription is not active until it as a purchase or renew transaction.
       tags 'Subscriptions'
       consumes 'application/json'
       security [ Bearer: {} ]
+      parameter name: 'limit', in: :query, type: :number
+      parameter name: 'offset', in: :query, type: :number
       description %Q(
 Returns a list of the current user subscriptions.
       )
@@ -71,7 +73,10 @@ Returns a list of the current user subscriptions.
               "product_id": 1,
               "created_at": "2026-04-04T12:53:09.007Z"
             }
-          ]
+          ],
+          "count": 1,
+          "limit": 20,
+          "offset": 0,
         }
         run_test!
       end
