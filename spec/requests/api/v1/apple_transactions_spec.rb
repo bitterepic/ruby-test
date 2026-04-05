@@ -7,7 +7,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
       consumes 'application/json'
       security [ Bearer: {} ]
       description %Q(
-An endpoint used for adding transactions to a subscription. Transactions record actions by the user for a subscription. The last 
+An endpoint used for adding transactions to a subscription. Transactions record actions by the user for a subscription. The last
 transaction is the active one for a subscription, while the rest can be used for record keeping.
 
 There are three different action types: `purchase`, `cancel` and `renew`.
@@ -15,7 +15,7 @@ There are three different action types: `purchase`, `cancel` and `renew`.
 NOTE: The `transaction_id` of this request maps to the related subscription `id` and `notification_uuid` is recorded as the `external_id`.
 
 - A purchase transaction is the first transaction for a subscription.  It is not active until created.
-- A renew must have a `purchase_date` that starts at the expiration of the previous transaction.  
+- A renew must have a `purchase_date` that starts at the expiration of the previous transaction.
 - A cancel transaction must share the same `purchase_date` and `expiration_date` as the previous transaction.
         ).chomp
       request_body_example(value: {

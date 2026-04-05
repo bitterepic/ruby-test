@@ -23,7 +23,7 @@ A type representing products that can be subscribed to.
           ],
           "count": 1,
           "limit": 20,
-          "offset": 0,
+          "offset": 0
         }
         run_test!
       end

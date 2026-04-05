@@ -76,7 +76,7 @@ Returns a list of the current user subscriptions.
           ],
           "count": 1,
           "limit": 20,
-          "offset": 0,
+          "offset": 0
         }
         run_test!
       end
