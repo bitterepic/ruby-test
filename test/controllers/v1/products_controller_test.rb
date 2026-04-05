@@ -31,10 +31,10 @@ class ProductsControllerTest < Testing::IntegrationTest
           "created_at" => "1990-01-01T00:00:00.000Z",
           "name" => "test product"
         }
-      ] ,
-      "count" => 2, 
-      "offset" => 0, 
-      "limit" => 20 
+      ],
+      "count" => 2,
+      "offset" => 0,
+      "limit" => 20
     }, response.parsed_body)
   end
 

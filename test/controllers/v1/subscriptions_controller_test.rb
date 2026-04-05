@@ -24,16 +24,16 @@ class SubscriptionsControllerTest < Testing::IntegrationTest
 
     get v1_subscriptions_path, headers: { Authorization: "Bearer #{@token}" }, as: :json
     assert_response :success
-    assert_equal({ 
+    assert_equal({
       "subscriptions" => [ {
         "id" => subscription.id,
         "created_at" =>  "1990-01-01T00:00:00.000Z",
         "product_id" => products(:monthly).id,
         "user_id" =>  @user_id
-      } ], 
-      "count" => 1, 
-      "offset" => 0, 
-      "limit" => 20 
+      } ],
+      "count" => 1,
+      "offset" => 0,
+      "limit" => 20
     }, response.parsed_body)
   end
 
