@@ -3188,3 +3188,41 @@ Processing by V1::ProductsController#index as JSON
 Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/v1/subscriptions" for 127.0.0.1 at 2026-04-05 23:09:10 +0900
+Processing by V1::SubscriptionsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 LIMIT 20 OFFSET 0 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:19:in 'V1::SubscriptionsController#index'
+  [1m[36mSubscription Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 LIMIT 20 OFFSET 0) AS subquery_for_count /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:20:in 'V1::SubscriptionsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.31ms)
+Completed 200 OK in 11ms (Views: 0.9ms | ActiveRecord: 0.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/subscriptions?offset=1" for 127.0.0.1 at 2026-04-05 23:09:24 +0900
+Processing by V1::SubscriptionsController#index as JSON
+  Parameters: {"offset" => "1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 LIMIT 20 OFFSET 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:19:in 'V1::SubscriptionsController#index'
+  [1m[36mSubscription Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 LIMIT 20 OFFSET 1) AS subquery_for_count /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:20:in 'V1::SubscriptionsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/v1/subscriptions?limit=1&offset=0" for 127.0.0.1 at 2026-04-05 23:09:28 +0900
+Processing by V1::SubscriptionsController#index as JSON
+  Parameters: {"limit" => "1", "offset" => "0"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/application_controller.rb:71:in 'ApplicationController#load_user'
+  [1m[36mSubscription Load (0.1ms)[0m  [1m[34mSELECT "subscriptions".* FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 LIMIT 1 OFFSET 0 /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:19:in 'V1::SubscriptionsController#index'
+  [1m[36mSubscription Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "subscriptions" WHERE "subscriptions"."user_id" = 1 LIMIT 1 OFFSET 0) AS subquery_for_count /*action='index',application='RubyTest',controller='subscriptions'*/[0m
+  ↳ app/controllers/v1/subscriptions_controller.rb:20:in 'V1::SubscriptionsController#index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 0.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
