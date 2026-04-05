@@ -8,7 +8,11 @@ describe 'api/v1/subscriptions', type: :request do
       tags 'Subscriptions'
       consumes 'application/json'
       security [ Bearer: {} ]
+      description %Q(
+Returns a detail view of a subscription, including the last_transaction which represents the current subscription state.
 
+A subscription is not active until it as a purchase or renew transaction.
+      )
       response '200', "Returns the user's subscription detail" do
         let(:"authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {
@@ -54,7 +58,9 @@ describe 'api/v1/subscriptions', type: :request do
       tags 'Subscriptions'
       consumes 'application/json'
       security [ Bearer: {} ]
-
+      description %Q(
+Returns a list of the current user subscriptions.
+      )
       response '200', 'Returns all subscriptions for the user' do
         let(:"authorization") { "Bearer #{token_for(user)}" }
         example 'application/json', :success, {

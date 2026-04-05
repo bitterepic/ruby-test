@@ -6,6 +6,18 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
       tags 'Webhooks'
       consumes 'application/json'
       security [ Bearer: {} ]
+      description %Q(
+An endpoint used for adding transactions to a subscription. Transactions record actions by the user for a subscription. The last 
+transaction is the active one for a subscription, while the rest can be used for record keeping.
+
+There are three different action types: `purchase`, `cancel` and `renew`.
+
+NOTE: The `transaction_id` of this request maps to the related subscription `id` and `notification_uuid` is recorded as the `external_id`.
+
+- A purchase transaction is the first transaction for a subscription.  It is not active until created.
+- A renew must have a `purchase_date` that starts at the expiration of the previous transaction.  
+- A cancel transaction must share the same `purchase_date` and `expiration_date` as the previous transaction.
+        ).chomp
       request_body_example(value: {
         "transaction": {
           "notification_uuid": "4d249252-118d-42c6-99b8-75ded060ceea",
@@ -17,7 +29,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
           "purchase_date": "1990-01-01T00:01:00.000Z",
           "expires_date": "1990-02-01T12:00:00.000Z"
         }
-      }, name: "Purchase a subscription", summary: "The required first transaction on a subscription to enable it. The apple transaction_id maps to a subscription_id.")
+      }, name: "Purchase a subscription", summary: "Purchase a subscription.")
       request_body_example(value: {
         "transaction": {
           "notification_uuid": "f949aaaa-f912-463d-8721-56da71e86a4d",
@@ -27,7 +39,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
           "purchase_date": "1990-01-01T00:01:00.000Z",
           "expires_date": "1990-02-01T12:00:00.000Z"
         }
-      }, name: "Cancel a subscription", summary: "A transaction signifying that a user has cancelled their subscription.  It must have the same purchase_date and expires_date as the previous transaction. The apple transaction_id maps to a subscription_id.")
+      }, name: "Cancel a subscription", summary: "Cancel a subscription.")
       request_body_example(value: {
         "transaction": {
           "notification_uuid": "f949aaaa-f912-463d-8721-56da71e86a4d",
@@ -39,7 +51,7 @@ RSpec.describe 'api/v1/apple_transactions', type: :request do
           "purchase_date": "1990-01-01T00:01:00.000Z",
           "expires_date": "1990-02-01T12:00:00.000Z"
         }
-      }, name: "Renew a subscription", summary: "A transaction signifying that a user has renewed their subscription.  The purchase date of the subscription must align to the previous expiration date. The apple transaction_id maps to a subscription_id.")
+      }, name: "Renew a subscription", summary: "Renew a subscription.")
       parameter name: 'body', in: :body, schema: {
         type: :object,
         properties: {

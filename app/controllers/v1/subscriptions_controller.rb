@@ -13,7 +13,7 @@ class V1::SubscriptionsController < ApplicationController
   # GET /subscriptions
   sig { returns(String) }
   def index
-    subscriptions = T.let(Subscription.where(user_id: authenticated_user.id).to_a, T::Array[Subscription])
+    subscriptions = T.let(Subscription.where(user_id: authenticated_user.id).to_a, T::Array[Subscription]).limit(limit).offset(offset)
 
     render json: { subscriptions: }
   end

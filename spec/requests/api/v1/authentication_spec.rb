@@ -5,6 +5,11 @@ describe 'api/v1/authentication', type: :request do
     post 'Creates a blog' do
       tags 'Authorization'
       consumes 'application/json'
+      description %Q(
+Registers a new user in the system. You can then use the login endpoint to get an api token.
+
+This is a simple login mecanism that uses email as the unique idenifier.
+      )
       request_body_example value: {
           email: "test@example.com",
           password: "0123456789",
@@ -53,12 +58,14 @@ describe 'api/v1/authentication', type: :request do
     post 'Logs in a user' do
       tags 'Authorization'
       consumes 'application/json'
+      description %Q(
+Authenticate a user using a username and password to recieve a token.  It should be passed to the HEAD of api requests in the format of `{ Authorization: "Bearer :token" }`.
+      )
       request_body_example value: {
           email: "test@example.com",
           password: "0123456789"
         },
-        name: 'Login a user',
-        summary: 'Returns the user\'s information and an authorization token. It should be passed as the bairer token to other authorized requests.'
+        name: 'Login a user'
       parameter name: 'body', in: :body, schema: {
         type: :object,
         properties: {
